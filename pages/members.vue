@@ -24,11 +24,11 @@
         </div>
 
         <!-- Members Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <button
             v-for="member in profiles"
             :key="member.slug"
-            class="bg-white border border-neutral-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow text-left cursor-pointer"
+            class="bg-white border border-neutral-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow text-left cursor-pointer flex flex-col"
             @click="openModal(member)"
           >
             <div v-if="member.avatar" class="aspect-square bg-neutral-100">
@@ -38,7 +38,7 @@
                 class="w-full h-full object-cover"
               />
             </div>
-            <div class="p-6">
+            <div class="p-6 flex-1">
               <p v-if="member.generation" class="text-xs text-kaiho-green font-medium mb-1">
                 {{ member.generation }}
               </p>
