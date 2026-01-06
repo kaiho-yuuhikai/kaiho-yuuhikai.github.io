@@ -25,10 +25,11 @@
 
         <!-- Members Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div
+          <button
             v-for="member in profiles"
             :key="member.slug"
-            class="bg-white border border-neutral-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+            class="bg-white border border-neutral-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow text-left cursor-pointer"
+            @click="openModal(member)"
           >
             <div v-if="member.avatar" class="aspect-square bg-neutral-100">
               <img
@@ -51,7 +52,7 @@
                 {{ member.description }}
               </p>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </section>
@@ -67,17 +68,123 @@
         </NuxtLink>
       </div>
     </section>
+
+    <!-- Modal -->
+    <Teleport to="body">
+      <Transition name="modal">
+        <div
+          v-if="selectedMember"
+          class="fixed inset-0 z-50 flex items-center justify-center p-4"
+          @click.self="closeModal"
+        >
+          <!-- Backdrop -->
+          <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" @click="closeModal"></div>
+
+          <!-- Modal Content -->
+          <div class="relative bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+            <!-- Close Button -->
+            <button
+              class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-neutral-500 hover:text-neutral-900 transition-colors shadow-md"
+              @click="closeModal"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            <!-- Member Image -->
+            <div v-if="selectedMember.avatar" class="aspect-[4/3] bg-neutral-100">
+              <img
+                :src="selectedMember.avatar"
+                :alt="selectedMember.title"
+                class="w-full h-full object-cover"
+              />
+            </div>
+
+            <!-- Member Info -->
+            <div class="p-8">
+              <p v-if="selectedMember.generation" class="text-sm text-kaiho-green font-medium mb-2">
+                {{ selectedMember.generation }}
+              </p>
+              <h2 class="text-2xl md:text-3xl font-medium text-neutral-900 mb-3">
+                {{ selectedMember.title }}
+              </h2>
+              <p v-if="selectedMember.role" class="text-lg text-neutral-600 mb-6">
+                {{ selectedMember.role }}
+              </p>
+              <div class="border-t border-neutral-100 pt-6">
+                <p v-if="selectedMember.description" class="text-neutral-600 leading-relaxed whitespace-pre-wrap">
+                  {{ selectedMember.description }}
+                </p>
+                <p v-else class="text-neutral-400 italic">
+                  詳細情報はありません
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Profile } from '~/composables/useCmsData'
+
 const { profiles, fetchData } = useCmsData()
 
+const selectedMember = ref<Profile | null>(null)
+
+const openModal = (member: Profile) => {
+  selectedMember.value = member
+  document.body.style.overflow = 'hidden'
+}
+
+const closeModal = () => {
+  selectedMember.value = null
+  document.body.style.overflow = ''
+}
+
+// Close modal on Escape key
 onMounted(async () => {
   await fetchData()
+
+  const handleEscape = (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && selectedMember.value) {
+      closeModal()
+    }
+  }
+  window.addEventListener('keydown', handleEscape)
+
+  onUnmounted(() => {
+    window.removeEventListener('keydown', handleEscape)
+    document.body.style.overflow = ''
+  })
 })
 
 useHead({
   title: '登壇者・メンター | 開邦高校 大同窓会'
 })
 </script>
+
+<style scoped>
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+
+.modal-enter-active .relative,
+.modal-leave-active .relative {
+  transition: transform 0.3s ease;
+}
+
+.modal-enter-from .relative,
+.modal-leave-to .relative {
+  transform: scale(0.95);
+}
+</style>
