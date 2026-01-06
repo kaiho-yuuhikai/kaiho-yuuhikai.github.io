@@ -31,12 +31,18 @@
             class="bg-white border border-neutral-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow text-left cursor-pointer flex flex-col"
             @click="openModal(member)"
           >
-            <div v-if="member.avatar" class="aspect-square bg-neutral-100">
+            <div class="aspect-square bg-neutral-100">
               <img
+                v-if="member.avatar"
                 :src="member.avatar"
                 :alt="member.title"
                 class="w-full h-full object-cover"
               />
+              <div v-else class="w-full h-full flex items-center justify-center">
+                <svg class="w-16 h-16 text-neutral-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </div>
             </div>
             <div class="p-6 flex-1">
               <p v-if="member.generation" class="text-xs text-kaiho-green font-medium mb-1">
