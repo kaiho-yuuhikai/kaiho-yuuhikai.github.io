@@ -10,12 +10,12 @@
       </div>
     </section>
 
-    <!-- Content -->
+    <!-- Speakers Section -->
     <section class="py-24 md:py-32">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center mb-16">
-          <p class="section-label">Speakers & Staff</p>
-          <h2 class="section-title mb-8">第三回大同窓会 登壇者・運営</h2>
+          <p class="section-label">Speakers</p>
+          <h2 class="section-title mb-8">登壇者</h2>
           <div class="divider mx-auto mb-8"></div>
           <p class="text-neutral-600 leading-relaxed">
             大同窓会では、様々な分野で活躍する卒業生の皆様に<br>
@@ -23,10 +23,10 @@
           </p>
         </div>
 
-        <!-- Members Grid -->
+        <!-- Speakers Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <button
-            v-for="member in profiles"
+            v-for="member in speakers"
             :key="member.slug"
             class="bg-white border border-neutral-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow text-left cursor-pointer flex flex-col"
             @click="openModal(member)"
@@ -56,6 +56,55 @@
               </p>
               <p v-if="member.description" class="text-sm text-neutral-500 line-clamp-3">
                 {{ member.description }}
+              </p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="py-24 md:py-32 bg-neutral-50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <p class="section-label">Staff</p>
+          <h2 class="section-title mb-8">運営メンバー</h2>
+          <div class="divider mx-auto mb-8"></div>
+          <p class="text-neutral-600 leading-relaxed">
+            大同窓会の企画・運営を担当したメンバーです。
+          </p>
+        </div>
+
+        <!-- Staff Grid - 4 columns on lg, 3 on md, 2 on sm -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          <button
+            v-for="member in staff"
+            :key="member.slug"
+            class="bg-white border border-neutral-100 rounded-lg overflow-hidden hover:shadow-lg transition-shadow text-left cursor-pointer flex flex-col"
+            @click="openModal(member)"
+          >
+            <div class="aspect-square bg-neutral-100">
+              <img
+                v-if="member.avatar"
+                :src="member.avatar"
+                :alt="member.title"
+                class="w-full h-full object-cover"
+              />
+              <div v-else class="w-full h-full flex items-center justify-center">
+                <svg class="w-12 h-12 text-neutral-300" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="p-3 md:p-4 flex-1">
+              <p v-if="member.generation || member.department" class="text-xs text-kaiho-green font-medium mb-1">
+                {{ member.generation }}<span v-if="member.generation && member.department">・</span>{{ member.department }}
+              </p>
+              <h3 class="text-sm md:text-base font-medium text-neutral-900 mb-1">
+                {{ member.title }}
+              </h3>
+              <p v-if="member.role" class="text-xs text-neutral-500 line-clamp-2">
+                {{ member.role }}
               </p>
             </div>
           </button>
@@ -138,6 +187,10 @@
 import type { Profile } from '~/composables/useCmsData'
 
 const { profiles, fetchData } = useCmsData()
+
+// Filter speakers and staff
+const speakers = computed(() => profiles.value.filter(p => p.roleType === '登壇者'))
+const staff = computed(() => profiles.value.filter(p => p.roleType === '運営メンバー'))
 
 const selectedMember = ref<Profile | null>(null)
 
