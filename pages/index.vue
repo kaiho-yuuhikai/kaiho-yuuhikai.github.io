@@ -139,36 +139,45 @@
           <h2 class="section-title">タイムライン</h2>
         </div>
 
-        <div class="max-w-3xl mx-auto">
-          <div class="grid md:grid-cols-2 gap-8">
-            <!-- Pre-Event -->
-            <div class="bg-kaiho-green/10 rounded-lg p-8">
-              <div class="flex items-center gap-3 mb-4">
+        <div class="max-w-4xl mx-auto">
+          <!-- Pre-Event Summary -->
+          <div class="bg-kaiho-green/10 rounded-lg p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
                 <span class="bg-kaiho-green text-white text-xs px-3 py-1 rounded-full">事前イベント</span>
+                <p class="text-xl font-medium text-neutral-900 mt-3">13:00 - 14:30　開邦キャリア・クロスロード</p>
+                <p class="text-neutral-600 text-sm mt-1">40名のメンターと学生・若手が交わるトークセッション</p>
               </div>
-              <p class="text-2xl font-medium text-neutral-900 mb-2">13:00 - 14:30</p>
-              <h3 class="text-lg font-medium text-neutral-800 mb-3">開邦キャリア・クロスロード</h3>
-              <p class="text-neutral-600 text-sm leading-relaxed mb-4">
-                40名のメンターと学生・若手が交わるトークセッション。世代を超えた交流の場です。
-              </p>
-              <NuxtLink to="/career-crossroads" class="text-kaiho-green hover:underline text-sm font-medium">
+              <NuxtLink to="/career-crossroads" class="text-kaiho-green hover:underline text-sm font-medium whitespace-nowrap">
                 詳細を見る →
               </NuxtLink>
             </div>
+          </div>
 
-            <!-- Main Event -->
-            <div class="bg-kaiho-gold/10 rounded-lg p-8">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="bg-kaiho-gold text-white text-xs px-3 py-1 rounded-full">本編</span>
+          <!-- Main Event Schedule -->
+          <div class="bg-kaiho-gold/10 rounded-lg p-6">
+            <div class="flex items-center gap-3 mb-6">
+              <span class="bg-kaiho-gold text-white text-xs px-3 py-1 rounded-full">本編</span>
+              <p class="text-lg font-medium text-neutral-900">15:00 - 17:30（開場 14:30）</p>
+            </div>
+
+            <div class="space-y-4">
+              <div
+                v-for="(item, index) in mainEventSchedule"
+                :key="item.slug"
+                class="flex gap-4 pb-4"
+                :class="{ 'border-b border-neutral-200': index < mainEventSchedule.length - 1 }"
+              >
+                <div class="flex-shrink-0 w-28 text-sm font-medium text-kaiho-gold">
+                  {{ item.startTime }} - {{ item.endTime }}
+                </div>
+                <div class="flex-1">
+                  <h4 class="text-neutral-900 font-medium">{{ item.title }}</h4>
+                  <p v-if="item.description" class="text-neutral-600 text-sm mt-1">
+                    {{ item.description }}
+                  </p>
+                </div>
               </div>
-              <p class="text-2xl font-medium text-neutral-900 mb-2">15:00 - 17:30</p>
-              <h3 class="text-lg font-medium text-neutral-800 mb-3">大同窓会</h3>
-              <p class="text-neutral-600 text-sm leading-relaxed mb-4">
-                開場14:30。ビュッフェ形式での軽食と交流をお楽しみください。フリードリンク制。
-              </p>
-              <p class="text-neutral-500 text-xs">
-                ※詳細プログラムは準備中です
-              </p>
             </div>
           </div>
         </div>
@@ -284,7 +293,7 @@
 </template>
 
 <script setup lang="ts">
-const { news, formatDate, fetchData } = useCmsData()
+const { news, mainEventSchedule, formatDate, fetchData } = useCmsData()
 
 onMounted(async () => {
   await fetchData()

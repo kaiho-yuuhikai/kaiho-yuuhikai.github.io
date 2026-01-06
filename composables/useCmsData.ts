@@ -47,6 +47,14 @@ export interface CareerScheduleItem {
   description: string
 }
 
+export interface MainEventScheduleItem {
+  title: string
+  slug: string
+  startTime: string
+  endTime: string
+  description: string
+}
+
 interface CmsData {
   news: any[]
   profiles: any[]
@@ -56,6 +64,7 @@ interface CmsData {
   other: any[]
   careerCrossroadsMentors: any[]
   careerCrossroadsSchedule: any[]
+  mainEventSchedule: any[]
 }
 
 export const useCmsData = () => {
@@ -72,7 +81,7 @@ export const useCmsData = () => {
       cmsData.value = data
     } catch (error) {
       console.error('Failed to fetch CMS data:', error)
-      cmsData.value = { news: [], profiles: [], sponsors: [], faq: [], donors: [], other: [], careerCrossroadsMentors: [], careerCrossroadsSchedule: [] }
+      cmsData.value = { news: [], profiles: [], sponsors: [], faq: [], donors: [], other: [], careerCrossroadsMentors: [], careerCrossroadsSchedule: [], mainEventSchedule: [] }
     } finally {
       isLoading.value = false
     }
@@ -150,6 +159,17 @@ export const useCmsData = () => {
     }))
   })
 
+  const mainEventSchedule = computed<MainEventScheduleItem[]>(() => {
+    if (!cmsData.value) return []
+    return (cmsData.value.mainEventSchedule || []).map((item: any) => ({
+      title: item.title || '',
+      slug: item.slug || '',
+      startTime: item.startTime || '',
+      endTime: item.endTime || '',
+      description: item.description || ''
+    }))
+  })
+
   const formatDate = (dateString: string): string => {
     if (!dateString) return ''
     const date = new Date(dateString)
@@ -167,6 +187,7 @@ export const useCmsData = () => {
     faq,
     careerMentors,
     careerSchedule,
+    mainEventSchedule,
     formatDate,
     stripHtml,
     isLoading,
