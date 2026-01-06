@@ -160,9 +160,15 @@
         <p class="text-neutral-600 mb-12 max-w-xl mx-auto">
           詳細情報やメニューについては、各ページをご確認ください。
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
           <NuxtLink to="/menu" class="btn-primary">
             メニューを見る
+          </NuxtLink>
+          <NuxtLink to="/members" class="btn-outline">
+            登壇者・メンター
+          </NuxtLink>
+          <NuxtLink to="/sponsors" class="btn-outline">
+            協賛企業・団体
           </NuxtLink>
           <NuxtLink to="/career-crossroads" class="btn-outline">
             キャリア交差点
