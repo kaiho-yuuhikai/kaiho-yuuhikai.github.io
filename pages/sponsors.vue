@@ -61,7 +61,11 @@
 </template>
 
 <script setup lang="ts">
-const { sponsors } = useCmsData()
+const { sponsors, fetchData } = useCmsData()
+
+onMounted(async () => {
+  await fetchData()
+})
 
 useHead({
   title: '協賛企業・団体 | 開邦高校 大同窓会'
