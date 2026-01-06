@@ -1,5 +1,3 @@
-import cmsData from '~/content/cms-data.json'
-
 export interface NewsArticle {
   title: string
   slug: string
@@ -21,6 +19,8 @@ export interface Sponsor {
   name: string
   slug: string
   logo?: string
+  category?: string
+  url?: string
 }
 
 export interface FaqItem {
@@ -29,9 +29,43 @@ export interface FaqItem {
   slug: string
 }
 
+interface CmsData {
+  news: any[]
+  profiles: any[]
+  sponsors: any[]
+  faq: any[]
+  donors: any[]
+  other: any[]
+}
+
 export const useCmsData = () => {
+  const cmsData = useState<CmsData | null>('cmsData', () => null)
+  const isLoading = useState('cmsDataLoading', () => false)
+
+  const fetchData = async () => {
+    if (cmsData.value) return
+    if (isLoading.value) return
+
+    isLoading.value = true
+    try {
+      const data = await $fetch<CmsData>('/data/cms-data.json')
+      cmsData.value = data
+    } catch (error) {
+      console.error('Failed to fetch CMS data:', error)
+      cmsData.value = { news: [], profiles: [], sponsors: [], faq: [], donors: [], other: [] }
+    } finally {
+      isLoading.value = false
+    }
+  }
+
+  // Auto-fetch on first use
+  if (!cmsData.value && !isLoading.value) {
+    fetchData()
+  }
+
   const news = computed<NewsArticle[]>(() => {
-    return (cmsData.news || []).map((item: any) => ({
+    if (!cmsData.value) return []
+    return (cmsData.value.news || []).map((item: any) => ({
       title: item.title || '',
       slug: item.slug || '',
       body: item.body || '',
@@ -41,7 +75,8 @@ export const useCmsData = () => {
   })
 
   const profiles = computed<Profile[]>(() => {
-    return (cmsData.profiles || []).map((item: any) => ({
+    if (!cmsData.value) return []
+    return (cmsData.value.profiles || []).map((item: any) => ({
       title: item.title || '',
       slug: item.slug || '',
       avatar: item.avatar || '',
@@ -52,15 +87,19 @@ export const useCmsData = () => {
   })
 
   const sponsors = computed<Sponsor[]>(() => {
-    return (cmsData.sponsors || []).map((item: any) => ({
+    if (!cmsData.value) return []
+    return (cmsData.value.sponsors || []).map((item: any) => ({
       name: item.name || '',
       slug: item.slug || '',
-      logo: item.logo || ''
+      logo: item.logo || item.Kr8gcaKy || '',
+      category: item.lxykwQVY?.title || '',
+      url: item.d4cBcZP0 || ''
     }))
   })
 
   const faq = computed<FaqItem[]>(() => {
-    return (cmsData.faq || []).map((item: any) => ({
+    if (!cmsData.value) return []
+    return (cmsData.value.faq || []).map((item: any) => ({
       question: item.question || '',
       answer: item.answer || '',
       slug: item.slug || ''
@@ -83,6 +122,8 @@ export const useCmsData = () => {
     sponsors,
     faq,
     formatDate,
-    stripHtml
+    stripHtml,
+    isLoading,
+    fetchData
   }
 }

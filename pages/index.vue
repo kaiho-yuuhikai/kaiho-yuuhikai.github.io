@@ -174,7 +174,11 @@
 </template>
 
 <script setup lang="ts">
-const { news, formatDate } = useCmsData()
+const { news, formatDate, fetchData } = useCmsData()
+
+onMounted(async () => {
+  await fetchData()
+})
 
 useHead({
   title: '沖縄県立 開邦高校 第三回 大同窓会'
