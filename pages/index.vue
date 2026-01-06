@@ -184,22 +184,36 @@
             <h2 class="section-title">実行委員長 挨拶</h2>
           </div>
           <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm">
-            <p class="text-neutral-700 leading-relaxed mb-6">
-              このたび、私どもの母校・開邦高等学校の創立40周年を記念し、第3回大同窓会を開催いたします。
-            </p>
-            <p class="text-neutral-700 leading-relaxed mb-6">
-              本校は、校訓「開邦雄飛」（邦を開き、世界に羽ばたく人材の育成）の理念のもと、知の探究と豊かな表現を育んできました。これまでに37期の卒業生を輩出し、各分野で活躍する同窓生の姿は、私たちの誇りであり大きな励みです。
-            </p>
+            <div class="md:flex md:gap-8 mb-8">
+              <div class="flex-shrink-0 mb-6 md:mb-0">
+                <img
+                  src="https://storage.googleapis.com/studio-cms-assets/projects/BVqXkelzOR/s-300x300_webp_c662db93-a50f-4164-baa1-865c34f72919.png"
+                  alt="宮城 潤"
+                  class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto md:mx-0"
+                />
+              </div>
+              <div>
+                <p class="text-neutral-700 leading-relaxed mb-6">
+                  このたび、私どもの母校・開邦高等学校の創立40周年を記念し、第3回大同窓会を開催いたします。
+                </p>
+                <p class="text-neutral-700 leading-relaxed mb-6">
+                  本校は、校訓「開邦雄飛」（邦を開き、世界に羽ばたく人材の育成）の理念のもと、知の探究と豊かな表現を育んできました。これまでに37期の卒業生を輩出し、各分野で活躍する同窓生の姿は、私たちの誇りであり大きな励みです。
+                </p>
+              </div>
+            </div>
             <p class="text-neutral-700 leading-relaxed mb-6">
               本会が、同窓生が世代や活動分野を超えてつながり、楽しく語り合える場となることを願っています。あわせて、在校生の教育環境充実のためのご協賛・ご寄付も募っております。温かなご支援に心より感謝申し上げます。
             </p>
             <p class="text-neutral-700 leading-relaxed mb-8">
               母校への誇りを確かめ、後輩たちの励みとなり、そして何よりも同窓生一人ひとりが明日への活力を得る場となるよう、旧交を温め、開邦らしい対話と笑顔に満ちた一日にいたしましょう。どうぞご参加のうえ、大いにお楽しみください。
             </p>
-            <p class="text-right text-neutral-600">
-              第3回開邦高校大同窓会実行委員会<br>
-              <span class="font-medium">実行委員長　宮城　潤</span>
-            </p>
+            <div class="flex items-center justify-end gap-4">
+              <div class="text-right text-neutral-600">
+                <p class="text-sm">第3回開邦高校大同窓会実行委員会</p>
+                <p class="font-medium">実行委員長　宮城　潤</p>
+                <p class="text-xs text-neutral-500 mt-1">3期・芸術科</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
