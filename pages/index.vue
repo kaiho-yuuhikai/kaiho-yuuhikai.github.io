@@ -161,7 +161,7 @@
               <p class="text-lg font-medium text-neutral-900">15:00 - 17:30（開場 14:30）</p>
             </div>
 
-            <div class="space-y-4">
+            <div v-if="mainEventSchedule.length > 0" class="space-y-4">
               <div
                 v-for="(item, index) in mainEventSchedule"
                 :key="item.slug"
@@ -179,6 +179,7 @@
                 </div>
               </div>
             </div>
+            <p v-else class="text-neutral-500 text-sm">読み込み中...</p>
           </div>
         </div>
       </div>
