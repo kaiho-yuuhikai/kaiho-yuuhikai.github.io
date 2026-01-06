@@ -99,11 +99,11 @@
             </button>
 
             <!-- Member Image -->
-            <div v-if="selectedMember.avatar" class="aspect-[4/3] bg-neutral-100">
+            <div v-if="selectedMember.avatar" class="bg-neutral-100">
               <img
                 :src="selectedMember.avatar"
                 :alt="selectedMember.title"
-                class="w-full h-full object-cover"
+                class="w-full h-auto"
               />
             </div>
 
