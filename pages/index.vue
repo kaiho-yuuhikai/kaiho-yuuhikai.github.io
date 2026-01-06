@@ -276,7 +276,7 @@
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
           <NuxtLink to="/members" class="btn-primary">
-            登壇者・メンター
+            登壇者・運営
           </NuxtLink>
           <NuxtLink to="/sponsors" class="btn-outline">
             協賛企業・団体

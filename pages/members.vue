@@ -5,7 +5,7 @@
       <div class="relative z-10 text-center text-white px-6">
         <p class="text-sm tracking-[0.3em] uppercase mb-4 text-white/60">Members</p>
         <h1 class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tight">
-          登壇者・メンター
+          登壇者・運営
         </h1>
       </div>
     </section>
@@ -14,8 +14,8 @@
     <section class="py-24 md:py-32">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center mb-16">
-          <p class="section-label">Speakers & Mentors</p>
-          <h2 class="section-title mb-8">第三回大同窓会 登壇者</h2>
+          <p class="section-label">Speakers & Staff</p>
+          <h2 class="section-title mb-8">第三回大同窓会 登壇者・運営</h2>
           <div class="divider mx-auto mb-8"></div>
           <p class="text-neutral-600 leading-relaxed">
             大同窓会では、様々な分野で活躍する卒業生の皆様に<br>
@@ -163,7 +163,7 @@ onMounted(async () => {
 })
 
 useHead({
-  title: '登壇者・メンター | 開邦高校 大同窓会'
+  title: '登壇者・運営 | 開邦高校 大同窓会'
 })
 </script>
 
