@@ -12,6 +12,7 @@ export interface Profile {
   avatar?: string
   role?: string
   generation?: string
+  department?: string
   description?: string
 }
 
@@ -111,6 +112,7 @@ export const useCmsData = () => {
       avatar: item.avatar || '',
       role: item.SA5o3FaJ || '',
       generation: item.ENXhgwbh?.[0]?.title || item.eZ9exVws || '',
+      department: item.whYERZ_l?.[0]?.title || '',
       description: item.GEXEusGX || item.EYjLtiv0 || ''
     }))
   })

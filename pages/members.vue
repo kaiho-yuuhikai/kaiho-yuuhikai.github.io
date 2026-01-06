@@ -45,8 +45,8 @@
               </div>
             </div>
             <div class="p-6 flex-1">
-              <p v-if="member.generation" class="text-xs text-kaiho-green font-medium mb-1">
-                {{ member.generation }}
+              <p v-if="member.generation || member.department" class="text-xs text-kaiho-green font-medium mb-1">
+                {{ member.generation }}<span v-if="member.generation && member.department">・</span>{{ member.department }}
               </p>
               <h3 class="text-lg font-medium text-neutral-900 mb-2">
                 {{ member.title }}
@@ -109,8 +109,8 @@
 
             <!-- Member Info -->
             <div class="p-8">
-              <p v-if="selectedMember.generation" class="text-sm text-kaiho-green font-medium mb-2">
-                {{ selectedMember.generation }}
+              <p v-if="selectedMember.generation || selectedMember.department" class="text-sm text-kaiho-green font-medium mb-2">
+                {{ selectedMember.generation }}<span v-if="selectedMember.generation && selectedMember.department">・</span>{{ selectedMember.department }}
               </p>
               <h2 class="text-2xl md:text-3xl font-medium text-neutral-900 mb-3">
                 {{ selectedMember.title }}
