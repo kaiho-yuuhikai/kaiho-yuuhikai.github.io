@@ -124,30 +124,28 @@
         </div>
 
         <div class="max-w-2xl mx-auto space-y-6">
-          <article class="group flex gap-6 items-start pb-6 border-b border-white/20">
-            <time class="text-sm text-white/60 flex-shrink-0 w-24">2025.01.01</time>
+          <NuxtLink
+            v-for="article in news.slice(0, 5)"
+            :key="article.slug"
+            :to="`/news/${article.slug}`"
+            class="group flex gap-6 items-start pb-6 border-b border-white/20 block"
+          >
+            <time class="text-sm text-white/60 flex-shrink-0 w-24">{{ formatDate(article._publishedAt) }}</time>
             <div>
               <h3 class="text-white group-hover:text-white/80 transition-colors">
-                ウェブサイトをリニューアルしました
+                {{ article.title }}
               </h3>
             </div>
-          </article>
-          <article class="group flex gap-6 items-start pb-6 border-b border-white/20">
-            <time class="text-sm text-white/60 flex-shrink-0 w-24">2024.12.15</time>
-            <div>
-              <h3 class="text-white group-hover:text-white/80 transition-colors">
-                第3回大同窓会の開催が決定しました
-              </h3>
-            </div>
-          </article>
-          <article class="group flex gap-6 items-start pb-6 border-b border-white/20">
-            <time class="text-sm text-white/60 flex-shrink-0 w-24">2024.11.01</time>
-            <div>
-              <h3 class="text-white group-hover:text-white/80 transition-colors">
-                創立40周年記念事業について
-              </h3>
-            </div>
-          </article>
+          </NuxtLink>
+        </div>
+
+        <div class="text-center mt-12">
+          <NuxtLink to="/news" class="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors text-sm tracking-wider">
+            すべてのお知らせを見る
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </NuxtLink>
         </div>
       </div>
     </section>
@@ -176,6 +174,8 @@
 </template>
 
 <script setup lang="ts">
+const { news, formatDate } = useCmsData()
+
 useHead({
   title: '沖縄県立 開邦高校 第三回 大同窓会'
 })
