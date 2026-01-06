@@ -85,6 +85,24 @@
               <p class="text-neutral-900">開邦高校 第三回 大同窓会</p>
             </div>
             <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
+              <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">日時</span>
+              <p class="text-neutral-900">2025年12月28日（日）15:00〜18:00</p>
+            </div>
+            <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
+              <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">会場</span>
+              <div>
+                <p class="text-neutral-900">パシフィックホテル沖縄</p>
+                <p class="text-neutral-500 text-sm mt-1">〒900-0036 沖縄県那覇市西3-6-1</p>
+              </div>
+            </div>
+            <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
+              <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">参加費</span>
+              <div>
+                <p class="text-neutral-900">1期〜30期生：7,000円</p>
+                <p class="text-neutral-900">31期〜37期生：4,000円</p>
+              </div>
+            </div>
+            <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
               <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">目的</span>
               <p class="text-neutral-900">創立40周年記念・同窓生の親睦</p>
             </div>
