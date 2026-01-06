@@ -86,20 +86,36 @@
             </div>
             <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
               <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">日時</span>
-              <p class="text-neutral-900">2025年12月28日（日）15:00〜18:00</p>
+              <div>
+                <p class="text-neutral-900">2025年12月28日（日）</p>
+                <p class="text-neutral-500 text-sm mt-1">開場 14:30 ／ 開演 15:00〜17:30</p>
+              </div>
             </div>
             <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
               <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">会場</span>
               <div>
                 <p class="text-neutral-900">パシフィックホテル沖縄</p>
-                <p class="text-neutral-500 text-sm mt-1">〒900-0036 沖縄県那覇市西3-6-1</p>
+                <p class="text-neutral-500 text-sm mt-1">万座の間＋珊瑚の間</p>
+                <p class="text-neutral-500 text-sm">〒900-0036 沖縄県那覇市西3-6-1</p>
               </div>
             </div>
             <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
               <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">参加費</span>
               <div>
+                <p class="text-neutral-900 font-medium mb-2">前売り（12月22日まで）</p>
+                <p class="text-neutral-900">1期〜30期生：5,500円</p>
+                <p class="text-neutral-900">31期〜37期生：3,000円</p>
+                <p class="text-neutral-900 font-medium mt-4 mb-2">当日</p>
                 <p class="text-neutral-900">1期〜30期生：7,000円</p>
                 <p class="text-neutral-900">31期〜37期生：4,000円</p>
+              </div>
+            </div>
+            <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
+              <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">申込</span>
+              <div>
+                <a href="https://peatix.com/event/4577195/view" target="_blank" class="text-kaiho-green hover:underline">
+                  Peatixでお申し込み →
+                </a>
               </div>
             </div>
             <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
@@ -115,20 +131,76 @@
       </div>
     </section>
 
-    <!-- Message Section -->
+    <!-- Timeline Section -->
     <section class="py-24 md:py-32">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
-        <div class="max-w-3xl mx-auto text-center">
-          <p class="section-label">Message</p>
-          <h2 class="section-title mb-12">ご挨拶</h2>
-          <blockquote class="text-xl md:text-2xl font-light text-neutral-700 leading-relaxed mb-8">
-            「久しぶりに恩師や旧友と再会し、<br class="hidden md:block">
-            学生時代の思い出に浸りながら、<br class="hidden md:block">
-            親睦を深める機会となれば幸いです。」
-          </blockquote>
-          <p class="text-sm tracking-wider text-neutral-500">
-            是非お誘いあわせの上、ご参加ください。
-          </p>
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <p class="section-label">Timeline</p>
+          <h2 class="section-title">タイムライン</h2>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+          <div class="grid md:grid-cols-2 gap-8">
+            <!-- Pre-Event -->
+            <div class="bg-kaiho-green/10 rounded-lg p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="bg-kaiho-green text-white text-xs px-3 py-1 rounded-full">事前イベント</span>
+              </div>
+              <p class="text-2xl font-medium text-neutral-900 mb-2">13:00 - 14:30</p>
+              <h3 class="text-lg font-medium text-neutral-800 mb-3">開邦キャリア・クロスロード</h3>
+              <p class="text-neutral-600 text-sm leading-relaxed mb-4">
+                40名のメンターと学生・若手が交わるトークセッション。世代を超えた交流の場です。
+              </p>
+              <NuxtLink to="/career-crossroads" class="text-kaiho-green hover:underline text-sm font-medium">
+                詳細を見る →
+              </NuxtLink>
+            </div>
+
+            <!-- Main Event -->
+            <div class="bg-kaiho-gold/10 rounded-lg p-8">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="bg-kaiho-gold text-white text-xs px-3 py-1 rounded-full">本編</span>
+              </div>
+              <p class="text-2xl font-medium text-neutral-900 mb-2">15:00 - 17:30</p>
+              <h3 class="text-lg font-medium text-neutral-800 mb-3">大同窓会</h3>
+              <p class="text-neutral-600 text-sm leading-relaxed mb-4">
+                開場14:30。ビュッフェ形式での軽食と交流をお楽しみください。フリードリンク制。
+              </p>
+              <p class="text-neutral-500 text-xs">
+                ※詳細プログラムは準備中です
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Message Section -->
+    <section class="py-24 md:py-32 bg-neutral-50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-12">
+            <p class="section-label">Message</p>
+            <h2 class="section-title">実行委員長 挨拶</h2>
+          </div>
+          <div class="bg-white rounded-lg p-8 md:p-12 shadow-sm">
+            <p class="text-neutral-700 leading-relaxed mb-6">
+              このたび、私どもの母校・開邦高等学校の創立40周年を記念し、第3回大同窓会を開催いたします。
+            </p>
+            <p class="text-neutral-700 leading-relaxed mb-6">
+              本校は、校訓「開邦雄飛」（邦を開き、世界に羽ばたく人材の育成）の理念のもと、知の探究と豊かな表現を育んできました。これまでに37期の卒業生を輩出し、各分野で活躍する同窓生の姿は、私たちの誇りであり大きな励みです。
+            </p>
+            <p class="text-neutral-700 leading-relaxed mb-6">
+              本会が、同窓生が世代や活動分野を超えてつながり、楽しく語り合える場となることを願っています。あわせて、在校生の教育環境充実のためのご協賛・ご寄付も募っております。温かなご支援に心より感謝申し上げます。
+            </p>
+            <p class="text-neutral-700 leading-relaxed mb-8">
+              母校への誇りを確かめ、後輩たちの励みとなり、そして何よりも同窓生一人ひとりが明日への活力を得る場となるよう、旧交を温め、開邦らしい対話と笑顔に満ちた一日にいたしましょう。どうぞご参加のうえ、大いにお楽しみください。
+            </p>
+            <p class="text-right text-neutral-600">
+              第3回開邦高校大同窓会実行委員会<br>
+              <span class="font-medium">実行委員長　宮城　潤</span>
+            </p>
+          </div>
         </div>
       </div>
     </section>
