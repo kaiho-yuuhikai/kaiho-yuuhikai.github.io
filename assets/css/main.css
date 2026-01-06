@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,33 +6,60 @@
 
 @layer base {
   html {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'Noto Sans JP', system-ui, sans-serif;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply text-gray-800 antialiased;
+    @apply text-neutral-800 bg-white;
+  }
+
+  ::selection {
+    @apply bg-neutral-900 text-white;
   }
 }
 
 @layer components {
-  .btn-primary {
-    @apply bg-primary-600 text-white px-6 py-3 rounded-lg font-medium
-           hover:bg-primary-700 transition-colors duration-200
-           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  .btn {
+    @apply inline-flex items-center justify-center px-8 py-4 text-sm font-medium tracking-wider uppercase
+           transition-all duration-300 ease-out;
   }
 
-  .btn-secondary {
-    @apply bg-white text-primary-600 border-2 border-primary-600 px-6 py-3 rounded-lg font-medium
-           hover:bg-primary-50 transition-colors duration-200
-           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  .btn-primary {
+    @apply btn bg-neutral-900 text-white hover:bg-neutral-700;
+  }
+
+  .btn-outline {
+    @apply btn border border-neutral-900 text-neutral-900 bg-transparent
+           hover:bg-neutral-900 hover:text-white;
+  }
+
+  .btn-white {
+    @apply btn bg-white text-neutral-900 hover:bg-neutral-100;
+  }
+
+  .section-label {
+    @apply text-xs font-medium tracking-widest uppercase text-neutral-500 mb-4;
   }
 
   .section-title {
-    @apply text-3xl md:text-4xl font-bold text-center mb-8;
+    @apply text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-neutral-900;
   }
 
-  .card {
-    @apply bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow duration-200;
+  .divider {
+    @apply w-12 h-px bg-neutral-300;
   }
+}
+
+/* Smooth page transitions */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
 }

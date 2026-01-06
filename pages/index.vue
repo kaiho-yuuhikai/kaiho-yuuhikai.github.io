@@ -1,100 +1,172 @@
 <template>
   <div>
     <!-- Hero Section -->
-    <section class="relative bg-gradient-to-br from-primary-600 to-primary-800 text-white py-20 md:py-32">
-      <div class="absolute inset-0 bg-black/20"></div>
-      <div class="relative max-w-6xl mx-auto px-4 text-center">
-        <p class="text-primary-200 text-lg mb-4">創立40周年記念</p>
-        <h1 class="text-4xl md:text-6xl font-bold mb-6">
-          沖縄県立 開邦高校<br class="md:hidden" />
-          <span class="block mt-2">第三回 大同窓会</span>
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+      <!-- Background Image -->
+      <div class="absolute inset-0">
+        <img
+          src="/images/cover-image.png"
+          alt="開邦高校"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 text-center text-white px-6 max-w-4xl">
+        <p class="text-sm tracking-[0.3em] uppercase mb-6 text-white/70">
+          創立40周年記念
+        </p>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-light mb-6 tracking-tight">
+          第三回 大同窓会
         </h1>
-        <p class="text-xl md:text-2xl text-primary-100 mb-8 max-w-3xl mx-auto leading-relaxed">
-          久しぶりに恩師や旧友と再会し、<br class="hidden md:block" />
-          学生時代の思い出に浸りながら、親睦を深める機会
+        <p class="text-lg md:text-xl font-light text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed">
+          沖縄県立 開邦高等学校
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#event-info" class="btn-primary text-lg">
-            開催概要を見る
+          <a href="#about" class="btn-white">
+            詳細を見る
           </a>
-          <NuxtLink to="/menu" class="btn-secondary bg-transparent border-white text-white hover:bg-white/10 text-lg">
-            メニューを見る
-          </NuxtLink>
         </div>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
       </div>
     </section>
 
     <!-- About Section -->
-    <section class="py-16 md:py-24 bg-gray-50">
-      <div class="max-w-6xl mx-auto px-4">
-        <h2 class="section-title">開邦高校について</h2>
-        <div class="max-w-3xl mx-auto text-center">
-          <p class="text-lg text-gray-600 leading-relaxed">
-            開邦高等学校は昭和61年に開校し、2025年で創立４０周年を迎えます。
-            この度、４０周年を記念して第三回大同窓会を開催する運びとなりました。
-          </p>
+    <section id="about" class="py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <p class="section-label">About</p>
+            <h2 class="section-title mb-8">
+              開邦高校について
+            </h2>
+            <div class="divider mb-8"></div>
+            <p class="text-neutral-600 leading-relaxed text-lg mb-6">
+              開邦高等学校は昭和61年に開校し、2025年で創立４０周年を迎えます。
+            </p>
+            <p class="text-neutral-600 leading-relaxed">
+              この度、４０周年を記念して第三回大同窓会を開催する運びとなりました。
+              久しぶりに恩師や旧友と再会し、学生時代の思い出に浸りながら、
+              親睦を深める機会となれば幸いです。
+            </p>
+          </div>
+          <div class="relative">
+            <div class="aspect-[4/3] bg-neutral-100 rounded-sm overflow-hidden">
+              <img
+                src="/images/og-image.png"
+                alt="大同窓会"
+                class="w-full h-full object-cover"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Event Info Section -->
-    <section id="event-info" class="py-16 md:py-24">
-      <div class="max-w-6xl mx-auto px-4">
-        <h2 class="section-title">開催概要</h2>
+    <section class="py-24 md:py-32 bg-neutral-50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <p class="section-label">Event</p>
+          <h2 class="section-title">開催概要</h2>
+        </div>
+
         <div class="max-w-2xl mx-auto">
-          <div class="card">
-            <dl class="space-y-6">
-              <div class="flex flex-col sm:flex-row sm:gap-4">
-                <dt class="font-semibold text-gray-900 sm:w-32 flex-shrink-0">イベント名</dt>
-                <dd class="text-gray-600 mt-1 sm:mt-0">開邦高校 第三回 大同窓会</dd>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:gap-4">
-                <dt class="font-semibold text-gray-900 sm:w-32 flex-shrink-0">目的</dt>
-                <dd class="text-gray-600 mt-1 sm:mt-0">創立40周年記念・同窓生の親睦</dd>
-              </div>
-              <div class="flex flex-col sm:flex-row sm:gap-4">
-                <dt class="font-semibold text-gray-900 sm:w-32 flex-shrink-0">対象</dt>
-                <dd class="text-gray-600 mt-1 sm:mt-0">開邦高等学校 卒業生・教職員</dd>
-              </div>
-            </dl>
+          <div class="space-y-8">
+            <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
+              <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">名称</span>
+              <p class="text-neutral-900">開邦高校 第三回 大同窓会</p>
+            </div>
+            <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
+              <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">目的</span>
+              <p class="text-neutral-900">創立40周年記念・同窓生の親睦</p>
+            </div>
+            <div class="flex gap-8 items-start pb-8 border-b border-neutral-200">
+              <span class="text-xs tracking-widest uppercase text-neutral-500 w-24 flex-shrink-0 pt-1">対象</span>
+              <p class="text-neutral-900">開邦高等学校 卒業生・教職員</p>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Message Section -->
-    <section class="py-16 md:py-24 bg-primary-50">
-      <div class="max-w-6xl mx-auto px-4">
-        <h2 class="section-title">ご挨拶</h2>
-        <div class="max-w-3xl mx-auto">
-          <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
-            <p class="text-gray-600 leading-relaxed text-lg">
-              久しぶりに恩師や旧友と再会し、学生時代の思い出に浸りながら、
-              親睦を深める機会となれば幸いです。
-              是非お誘いあわせの上、ご参加ください。
-            </p>
-            <p class="mt-6 text-right text-gray-500">
-              開邦高校友会
-            </p>
-          </div>
+    <section class="py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center">
+          <p class="section-label">Message</p>
+          <h2 class="section-title mb-12">ご挨拶</h2>
+          <blockquote class="text-xl md:text-2xl font-light text-neutral-700 leading-relaxed mb-8">
+            「久しぶりに恩師や旧友と再会し、<br class="hidden md:block">
+            学生時代の思い出に浸りながら、<br class="hidden md:block">
+            親睦を深める機会となれば幸いです。」
+          </blockquote>
+          <p class="text-sm tracking-wider text-neutral-500">
+            是非お誘いあわせの上、ご参加ください。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="py-24 md:py-32 bg-neutral-900 text-white">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+          <p class="section-label text-neutral-500">News</p>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white">お知らせ</h2>
+        </div>
+
+        <div class="max-w-2xl mx-auto space-y-6">
+          <article class="group flex gap-6 items-start pb-6 border-b border-neutral-800">
+            <time class="text-sm text-neutral-500 flex-shrink-0 w-24">2025.01.01</time>
+            <div>
+              <h3 class="text-white group-hover:text-neutral-300 transition-colors">
+                ウェブサイトをリニューアルしました
+              </h3>
+            </div>
+          </article>
+          <article class="group flex gap-6 items-start pb-6 border-b border-neutral-800">
+            <time class="text-sm text-neutral-500 flex-shrink-0 w-24">2024.12.15</time>
+            <div>
+              <h3 class="text-white group-hover:text-neutral-300 transition-colors">
+                第三回大同窓会の開催が決定しました
+              </h3>
+            </div>
+          </article>
+          <article class="group flex gap-6 items-start pb-6 border-b border-neutral-800">
+            <time class="text-sm text-neutral-500 flex-shrink-0 w-24">2024.11.01</time>
+            <div>
+              <h3 class="text-white group-hover:text-neutral-300 transition-colors">
+                創立40周年記念事業について
+              </h3>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 md:py-24 bg-gradient-to-r from-primary-600 to-primary-700 text-white">
-      <div class="max-w-6xl mx-auto px-4 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+    <section class="py-24 md:py-32">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+        <p class="section-label">Join Us</p>
+        <h2 class="section-title mb-8">
           皆様のご参加をお待ちしております
         </h2>
-        <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+        <p class="text-neutral-600 mb-12 max-w-xl mx-auto">
           詳細情報やメニューについては、各ページをご確認ください。
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <NuxtLink to="/menu" class="btn-primary bg-white text-primary-700 hover:bg-gray-100">
-            メニューを確認
+          <NuxtLink to="/menu" class="btn-primary">
+            メニューを見る
           </NuxtLink>
-          <NuxtLink to="/career-crossroads" class="btn-secondary border-white text-white hover:bg-white/10">
+          <NuxtLink to="/career-crossroads" class="btn-outline">
             キャリア交差点
           </NuxtLink>
         </div>
