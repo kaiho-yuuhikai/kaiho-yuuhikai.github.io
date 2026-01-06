@@ -26,22 +26,33 @@
 
         <!-- Sponsors Grid -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          <div
+          <component
+            :is="sponsor.url ? 'a' : 'div'"
             v-for="sponsor in sponsors"
             :key="sponsor.slug"
-            class="bg-white border border-neutral-100 rounded-lg p-6 flex items-center justify-center min-h-[120px] hover:shadow-md transition-shadow"
+            :href="sponsor.url || undefined"
+            :target="sponsor.url ? '_blank' : undefined"
+            :rel="sponsor.url ? 'noopener noreferrer' : undefined"
+            class="bg-white border border-neutral-100 rounded-lg p-6 flex flex-col items-center justify-center min-h-[160px] hover:shadow-md transition-shadow"
+            :class="{ 'cursor-pointer': sponsor.url }"
           >
-            <div v-if="sponsor.logo" class="w-full">
+            <div v-if="sponsor.logo" class="w-full flex-1 flex items-center justify-center mb-3">
               <img
                 :src="sponsor.logo"
                 :alt="sponsor.name"
                 class="w-full h-16 object-contain"
               />
             </div>
-            <p v-else class="text-neutral-700 text-center text-sm font-medium">
+            <p class="text-neutral-700 text-center text-sm font-medium" :class="{ 'flex-1 flex items-center': !sponsor.logo }">
               {{ sponsor.name }}
             </p>
-          </div>
+            <p v-if="sponsor.url" class="text-xs text-kaiho-green mt-2 flex items-center gap-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+              Website
+            </p>
+          </component>
         </div>
       </div>
     </section>
