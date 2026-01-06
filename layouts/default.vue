@@ -102,12 +102,28 @@
               >
                 {{ link.label }}
               </NuxtLink>
+              <a
+                href="https://www.kaiho-h.open.ed.jp/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block text-white/70 hover:text-white transition-colors text-sm"
+              >
+                開邦高校公式サイト
+              </a>
+              <a
+                href="https://www.facebook.com/kaihoyuhi/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="block text-white/70 hover:text-white transition-colors text-sm"
+              >
+                Facebook
+              </a>
             </div>
           </div>
         </div>
         <div class="mt-16 pt-8 border-t border-white/20 text-center">
           <p class="text-white/50 text-xs tracking-wider">
-            &copy; 2025 開邦高校友会
+            &copy; 2025 開邦雄飛会
           </p>
         </div>
       </div>

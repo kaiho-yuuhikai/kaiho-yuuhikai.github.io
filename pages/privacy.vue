@@ -63,7 +63,7 @@
             <h2 class="text-xl font-medium text-neutral-900 mb-6">5. お問い合わせ</h2>
             <p class="text-neutral-600 leading-relaxed">
               個人情報の取り扱いに関するお問い合わせは、
-              開邦高校友会までご連絡ください。
+              開邦雄飛会までご連絡ください。
             </p>
           </div>
         </div>
