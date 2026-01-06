@@ -2237,5 +2237,91 @@
       "endTime": "",
       "description": "事前イベント終了です。熱気そのままに、この後の「本編（大同窓会）」 でさらに交流を深めましょう。"
     }
+  ],
+  "mainEventSchedule": [
+    {
+      "startTime": "15:00",
+      "endTime": "15:05",
+      "title": "第一部：開会あいさつ",
+      "description": "",
+      "slug": "honpen-close-greeting"
+    },
+    {
+      "startTime": "15:05",
+      "endTime": "15:10",
+      "title": "校歌斉唱",
+      "description": "",
+      "slug": "fw15tMq5"
+    },
+    {
+      "startTime": "15:10",
+      "endTime": "15:15",
+      "title": "第一部：校長あいさつ",
+      "description": "",
+      "slug": "honpen-greeting"
+    },
+    {
+      "startTime": "15:15",
+      "endTime": "15:20",
+      "title": "第一部：乾杯あいさつ",
+      "description": "",
+      "slug": "honpen-ceremony"
+    },
+    {
+      "startTime": "15:20",
+      "endTime": "15:30",
+      "title": "第一部：ご歓談（スライドショー）、多良川など泡盛のPR",
+      "description": "",
+      "slug": "honpen-pr"
+    },
+    {
+      "startTime": "15:30",
+      "endTime": "16:10",
+      "title": "第二部：セッション「キャリアの分岐点」",
+      "description": "【登壇者】親川純氏(2期・リウボウインダストリー社長)、山城知佳子氏(6期・東京芸術大学教授)、下地彩子氏(13期・グーグルジャパン)、玉城陽平氏(22期・社会起業家、南風原町議会議員)",
+      "slug": "honpen-session-career"
+    },
+    {
+      "startTime": "16:10",
+      "endTime": "16:15",
+      "title": "第二部：同窓会活動の紹介",
+      "description": "",
+      "slug": "honpen-activity"
+    },
+    {
+      "startTime": "16:15",
+      "endTime": "16:40",
+      "title": "芸大生演奏【33期ピアノ専攻有志の会】",
+      "description": "母校の後輩たち（33期・県芸大生）による圧巻のピアノ連弾。「琉球幻想曲」など、魂を揺さぶる生演奏。【演奏者】辺土百々花、新城一大、高江洲愛奏、仲宗根和志",
+      "slug": "honpen-ensou"
+    },
+    {
+      "startTime": "16:40",
+      "endTime": "16:55",
+      "title": "第三部：愛校心カップ表彰",
+      "description": "",
+      "slug": "honpen-award"
+    },
+    {
+      "startTime": "16:55",
+      "endTime": "17:05",
+      "title": "第三部：フライヤーコンペの表彰",
+      "description": "",
+      "slug": "honpen-flyer"
+    },
+    {
+      "startTime": "17:05",
+      "endTime": "17:20",
+      "title": "第三部：集合写真撮影",
+      "description": "",
+      "slug": "honpen-picture"
+    },
+    {
+      "startTime": "17:20",
+      "endTime": "17:30",
+      "title": "第三部：閉会あいさつ",
+      "description": "",
+      "slug": "honpen-close"
+    }
   ]
 }
