@@ -29,6 +29,24 @@ export interface FaqItem {
   slug: string
 }
 
+export interface CareerMentor {
+  title: string
+  slug: string
+  avatar?: string
+  role?: string
+  generation?: string
+  department?: string
+  description?: string
+}
+
+export interface CareerScheduleItem {
+  title: string
+  slug: string
+  startTime: string
+  endTime: string
+  description: string
+}
+
 interface CmsData {
   news: any[]
   profiles: any[]
@@ -36,6 +54,8 @@ interface CmsData {
   faq: any[]
   donors: any[]
   other: any[]
+  careerCrossroadsMentors: any[]
+  careerCrossroadsSchedule: any[]
 }
 
 export const useCmsData = () => {
@@ -52,7 +72,7 @@ export const useCmsData = () => {
       cmsData.value = data
     } catch (error) {
       console.error('Failed to fetch CMS data:', error)
-      cmsData.value = { news: [], profiles: [], sponsors: [], faq: [], donors: [], other: [] }
+      cmsData.value = { news: [], profiles: [], sponsors: [], faq: [], donors: [], other: [], careerCrossroadsMentors: [], careerCrossroadsSchedule: [] }
     } finally {
       isLoading.value = false
     }
@@ -106,6 +126,30 @@ export const useCmsData = () => {
     }))
   })
 
+  const careerMentors = computed<CareerMentor[]>(() => {
+    if (!cmsData.value) return []
+    return (cmsData.value.careerCrossroadsMentors || []).map((item: any) => ({
+      title: item.title || '',
+      slug: item.slug || '',
+      avatar: item.avatar || '',
+      role: item.role || '',
+      generation: item.generation || '',
+      department: item.department || '',
+      description: item.description || ''
+    }))
+  })
+
+  const careerSchedule = computed<CareerScheduleItem[]>(() => {
+    if (!cmsData.value) return []
+    return (cmsData.value.careerCrossroadsSchedule || []).map((item: any) => ({
+      title: item.title || '',
+      slug: item.slug || '',
+      startTime: item.startTime || '',
+      endTime: item.endTime || '',
+      description: item.description || ''
+    }))
+  })
+
   const formatDate = (dateString: string): string => {
     if (!dateString) return ''
     const date = new Date(dateString)
@@ -121,6 +165,8 @@ export const useCmsData = () => {
     profiles,
     sponsors,
     faq,
+    careerMentors,
+    careerSchedule,
     formatDate,
     stripHtml,
     isLoading,
