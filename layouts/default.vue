@@ -122,7 +122,6 @@ const scrolled = ref(false)
 const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/news', label: 'News' },
-  { to: '/menu', label: 'Menu' },
   { to: '/members', label: 'Members' },
   { to: '/sponsors', label: 'Sponsors' },
   { to: '/career-crossroads', label: 'Career' },

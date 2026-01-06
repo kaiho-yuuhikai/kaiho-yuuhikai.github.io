@@ -272,13 +272,10 @@
           皆様のご参加をお待ちしております
         </h2>
         <p class="text-neutral-600 mb-12 max-w-xl mx-auto">
-          詳細情報やメニューについては、各ページをご確認ください。
+          詳細情報については、各ページをご確認ください。
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
-          <NuxtLink to="/menu" class="btn-primary">
-            メニューを見る
-          </NuxtLink>
-          <NuxtLink to="/members" class="btn-outline">
+          <NuxtLink to="/members" class="btn-primary">
             登壇者・メンター
           </NuxtLink>
           <NuxtLink to="/sponsors" class="btn-outline">
