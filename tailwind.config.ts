@@ -15,12 +15,14 @@ export default {
         sans: ['"Noto Sans JP"', 'system-ui', 'sans-serif'],
       },
       colors: {
-        accent: '#1a1a1a',
+        kaiho: {
+          green: '#2d8c3c',
+          'green-dark': '#1f6b2a',
+          cream: '#f5f1e8',
+          'cream-dark': '#e8e2d4',
+          gold: '#d4a017',
+        }
       },
-      letterSpacing: {
-        wider: '0.1em',
-        widest: '0.2em',
-      }
     },
   },
   plugins: [],

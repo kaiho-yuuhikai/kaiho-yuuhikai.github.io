@@ -17,31 +17,31 @@
   }
 
   ::selection {
-    @apply bg-neutral-900 text-white;
+    @apply bg-kaiho-green text-white;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center px-8 py-4 text-sm font-medium tracking-wider uppercase
+    @apply inline-flex items-center justify-center px-8 py-4 text-sm font-medium tracking-wider
            transition-all duration-300 ease-out;
   }
 
   .btn-primary {
-    @apply btn bg-neutral-900 text-white hover:bg-neutral-700;
+    @apply btn bg-kaiho-green text-white hover:bg-kaiho-green-dark;
   }
 
   .btn-outline {
-    @apply btn border border-neutral-900 text-neutral-900 bg-transparent
-           hover:bg-neutral-900 hover:text-white;
+    @apply btn border border-kaiho-green text-kaiho-green bg-transparent
+           hover:bg-kaiho-green hover:text-white;
   }
 
   .btn-white {
-    @apply btn bg-white text-neutral-900 hover:bg-neutral-100;
+    @apply btn bg-white text-kaiho-green-dark hover:bg-kaiho-cream;
   }
 
   .section-label {
-    @apply text-xs font-medium tracking-widest uppercase text-neutral-500 mb-4;
+    @apply text-xs font-medium tracking-widest uppercase text-kaiho-green mb-4;
   }
 
   .section-title {
@@ -49,7 +49,7 @@
   }
 
   .divider {
-    @apply w-12 h-px bg-neutral-300;
+    @apply w-12 h-px bg-kaiho-green;
   }
 }
 

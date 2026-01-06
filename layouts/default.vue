@@ -81,32 +81,32 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-neutral-900 text-white">
+    <footer class="bg-kaiho-green-dark text-white">
       <div class="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         <div class="grid md:grid-cols-2 gap-12">
           <div>
             <p class="text-2xl font-light mb-4">開邦高校 大同窓会</p>
-            <p class="text-neutral-400 text-sm leading-relaxed">
+            <p class="text-white/70 text-sm leading-relaxed">
               創立40周年記念<br>
               沖縄県立開邦高等学校
             </p>
           </div>
           <div class="md:text-right">
-            <p class="section-label text-neutral-500">Links</p>
+            <p class="text-xs font-medium tracking-widest uppercase text-white/50 mb-4">Links</p>
             <div class="space-y-2">
               <NuxtLink
                 v-for="link in navLinks"
                 :key="link.to"
                 :to="link.to"
-                class="block text-neutral-400 hover:text-white transition-colors text-sm"
+                class="block text-white/70 hover:text-white transition-colors text-sm"
               >
                 {{ link.label }}
               </NuxtLink>
             </div>
           </div>
         </div>
-        <div class="mt-16 pt-8 border-t border-neutral-800 text-center">
-          <p class="text-neutral-500 text-xs tracking-wider">
+        <div class="mt-16 pt-8 border-t border-white/20 text-center">
+          <p class="text-white/50 text-xs tracking-wider">
             &copy; 2025 開邦高校友会
           </p>
         </div>

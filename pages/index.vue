@@ -14,14 +14,14 @@
 
       <!-- Content -->
       <div class="relative z-10 text-center text-white px-6 max-w-4xl">
-        <p class="text-sm tracking-[0.3em] uppercase mb-6 text-white/70">
-          創立40周年記念
+        <p class="text-sm tracking-[0.3em] uppercase mb-6 text-kaiho-gold font-medium">
+          今年で創立40周年！
         </p>
         <h1 class="text-4xl md:text-6xl lg:text-7xl font-light mb-6 tracking-tight">
-          第三回 大同窓会
+          第3回 開邦高校大同窓会
         </h1>
-        <p class="text-lg md:text-xl font-light text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed">
-          沖縄県立 開邦高等学校
+        <p class="text-xl md:text-2xl font-light text-white/90 mb-12 max-w-2xl mx-auto leading-relaxed">
+          懐かしい話も、未来の話も、しよう。
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a href="#about" class="btn-white">
@@ -116,34 +116,34 @@
     </section>
 
     <!-- News Section -->
-    <section class="py-24 md:py-32 bg-neutral-900 text-white">
+    <section class="py-24 md:py-32 bg-kaiho-green text-white">
       <div class="max-w-7xl mx-auto px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center mb-16">
-          <p class="section-label text-neutral-500">News</p>
+          <p class="text-xs font-medium tracking-widest uppercase text-white/60 mb-4">News</p>
           <h2 class="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white">お知らせ</h2>
         </div>
 
         <div class="max-w-2xl mx-auto space-y-6">
-          <article class="group flex gap-6 items-start pb-6 border-b border-neutral-800">
-            <time class="text-sm text-neutral-500 flex-shrink-0 w-24">2025.01.01</time>
+          <article class="group flex gap-6 items-start pb-6 border-b border-white/20">
+            <time class="text-sm text-white/60 flex-shrink-0 w-24">2025.01.01</time>
             <div>
-              <h3 class="text-white group-hover:text-neutral-300 transition-colors">
+              <h3 class="text-white group-hover:text-white/80 transition-colors">
                 ウェブサイトをリニューアルしました
               </h3>
             </div>
           </article>
-          <article class="group flex gap-6 items-start pb-6 border-b border-neutral-800">
-            <time class="text-sm text-neutral-500 flex-shrink-0 w-24">2024.12.15</time>
+          <article class="group flex gap-6 items-start pb-6 border-b border-white/20">
+            <time class="text-sm text-white/60 flex-shrink-0 w-24">2024.12.15</time>
             <div>
-              <h3 class="text-white group-hover:text-neutral-300 transition-colors">
-                第三回大同窓会の開催が決定しました
+              <h3 class="text-white group-hover:text-white/80 transition-colors">
+                第3回大同窓会の開催が決定しました
               </h3>
             </div>
           </article>
-          <article class="group flex gap-6 items-start pb-6 border-b border-neutral-800">
-            <time class="text-sm text-neutral-500 flex-shrink-0 w-24">2024.11.01</time>
+          <article class="group flex gap-6 items-start pb-6 border-b border-white/20">
+            <time class="text-sm text-white/60 flex-shrink-0 w-24">2024.11.01</time>
             <div>
-              <h3 class="text-white group-hover:text-neutral-300 transition-colors">
+              <h3 class="text-white group-hover:text-white/80 transition-colors">
                 創立40周年記念事業について
               </h3>
             </div>
