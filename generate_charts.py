@@ -730,7 +730,7 @@ def chart_participation_potential():
     ax.set_title('関与なし期の参加者増加ポテンシャル（メンター・運営配置で+10名/期）', fontsize=13, fontweight='bold', pad=15)
     ax.set_xticks(x)
     ax.set_xticklabels(classes, fontsize=10)
-    ax.legend(loc='upper right', fontsize=10)
+    ax.legend(loc='upper left', fontsize=10)
     ax.set_ylim(0, 22)
 
     # 合計増加見込み
