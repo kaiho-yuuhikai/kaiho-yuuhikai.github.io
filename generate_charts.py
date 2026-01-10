@@ -47,7 +47,7 @@ def setup_style():
 def save_figure(fig, filename):
     """図を保存（サイズ最適化）"""
     filepath = f'images/analysis/{filename}'
-    fig.savefig(filepath, dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
+    fig.savefig(filepath, dpi=120, bbox_inches='tight', facecolor='white', edgecolor='none')
     plt.close(fig)
     print(f'Saved: {filepath}')
 
@@ -663,28 +663,38 @@ def chart_generation_radar():
 
     # 各世代のデータ（0-100にスケール）
     data = {
-        '1〜10期': [85, 85, 80, 100, 90, 85],
-        '11〜20期': [75, 76, 78, 50, 80, 80],
+        '1〜10期（ベテラン）': [85, 85, 80, 100, 90, 85],
+        '11〜20期（中堅）': [75, 76, 78, 50, 80, 80],
         '21〜30期': [50, 74, 35, 0, 45, 75],
-        '31〜37期': [30, 55, 100, 0, 25, 70],
+        '31〜37期（若手）': [30, 55, 100, 0, 25, 70],
     }
 
     angles = [n / float(N) * 2 * pi for n in range(N)]
     angles += angles[:1]
 
-    fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
+    fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
 
-    colors = [COLORS['primary'], COLORS['secondary'], '#63B3ED', '#90CDF4']
-    for (gen, values), color in zip(data.items(), colors):
+    # より区別しやすい色に変更
+    distinct_colors = ['#1A365D', '#E53E3E', '#38A169', '#D69E2E']  # 紺、赤、緑、黄
+    line_styles = ['-', '--', '-.', ':']
+    markers = ['o', 's', '^', 'D']
+
+    for i, ((gen, values), color) in enumerate(zip(data.items(), distinct_colors)):
         values = values + values[:1]
-        ax.plot(angles, values, 'o-', linewidth=2, label=gen, color=color)
-        ax.fill(angles, values, alpha=0.15, color=color)
+        ax.plot(angles, values, marker=markers[i], linestyle=line_styles[i],
+                linewidth=3, label=gen, color=color, markersize=8)
+        ax.fill(angles, values, alpha=0.1, color=color)
 
     ax.set_xticks(angles[:-1])
-    ax.set_xticklabels(categories, fontsize=10)
+    ax.set_xticklabels(categories, fontsize=12, fontweight='bold')
     ax.set_ylim(0, 100)
-    ax.set_title('世代別 特性比較（レーダーチャート）', fontsize=14, fontweight='bold', pad=20)
-    ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.0), fontsize=9)
+    ax.set_title('世代別 特性比較（レーダーチャート）', fontsize=16, fontweight='bold', pad=25)
+    ax.legend(loc='upper right', bbox_to_anchor=(1.35, 1.05), fontsize=11)
+
+    # グリッド線を見やすく
+    ax.set_rticks([20, 40, 60, 80, 100])
+    ax.set_yticklabels(['20', '40', '60', '80', '100'], fontsize=9)
+    ax.grid(True, alpha=0.4)
 
     save_figure(fig, 'generation_radar.png')
 
