@@ -1041,33 +1041,48 @@ def chart_revenue_waterfall():
 # ===========================================
 def chart_opening_conditions():
     """開催希望条件のドーナツチャート"""
-    fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+    fig, axes = plt.subplots(1, 3, figsize=(14, 5))
+
+    # 色を明るめに変更して視認性を向上
+    chart_colors = ['#4A90D9', '#7BC96F', '#F5A623', '#BDBDBD']
 
     # 開催頻度
     freq_labels = ['5年に1回', '3年に1回', '毎年', 'その他']
     freq_sizes = [52.5, 30.5, 10.2, 6.8]
-    axes[0].pie(freq_sizes, labels=freq_labels, autopct='%1.1f%%', startangle=90,
-                colors=[COLORS['primary'], COLORS['secondary'], '#63B3ED', COLORS['light_gray']],
-                wedgeprops=dict(width=0.5, edgecolor='white'), textprops={'fontsize': 9})
+    wedges0, texts0, autotexts0 = axes[0].pie(
+        freq_sizes, labels=freq_labels, autopct='%1.0f%%', startangle=90,
+        colors=chart_colors, wedgeprops=dict(width=0.5, edgecolor='white'),
+        textprops={'fontsize': 10}, pctdistance=0.75)
+    for autotext in autotexts0:
+        autotext.set_color('white')
+        autotext.set_fontweight('bold')
     axes[0].set_title('開催頻度', fontsize=12, fontweight='bold')
 
     # 開催時期
     time_labels = ['年末年始', '夏休み', 'GW', 'その他']
     time_sizes = [81.4, 10.2, 5.1, 3.3]
-    axes[1].pie(time_sizes, labels=time_labels, autopct='%1.1f%%', startangle=90,
-                colors=[COLORS['primary'], COLORS['secondary'], '#63B3ED', COLORS['light_gray']],
-                wedgeprops=dict(width=0.5, edgecolor='white'), textprops={'fontsize': 9})
+    wedges1, texts1, autotexts1 = axes[1].pie(
+        time_sizes, labels=time_labels, autopct='%1.0f%%', startangle=90,
+        colors=chart_colors, wedgeprops=dict(width=0.5, edgecolor='white'),
+        textprops={'fontsize': 10}, pctdistance=0.75)
+    for autotext in autotexts1:
+        autotext.set_color('white')
+        autotext.set_fontweight('bold')
     axes[1].set_title('開催時期', fontsize=12, fontweight='bold')
 
     # 曜日
     day_labels = ['土曜日', '日曜日', '平日', '不問']
     day_sizes = [33.9, 28.8, 5.1, 32.2]
-    axes[2].pie(day_sizes, labels=day_labels, autopct='%1.1f%%', startangle=90,
-                colors=[COLORS['primary'], COLORS['secondary'], '#63B3ED', COLORS['light_gray']],
-                wedgeprops=dict(width=0.5, edgecolor='white'), textprops={'fontsize': 9})
+    wedges2, texts2, autotexts2 = axes[2].pie(
+        day_sizes, labels=day_labels, autopct='%1.0f%%', startangle=90,
+        colors=chart_colors, wedgeprops=dict(width=0.5, edgecolor='white'),
+        textprops={'fontsize': 10}, pctdistance=0.75)
+    for autotext in autotexts2:
+        autotext.set_color('white')
+        autotext.set_fontweight('bold')
     axes[2].set_title('希望曜日', fontsize=12, fontweight='bold')
 
-    fig.suptitle('開催希望条件', fontsize=14, fontweight='bold', y=1.05)
+    fig.suptitle('開催希望条件', fontsize=14, fontweight='bold', y=1.02)
     plt.tight_layout()
 
     save_figure(fig, 'opening_conditions.png')
