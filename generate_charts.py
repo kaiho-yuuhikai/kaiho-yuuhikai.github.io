@@ -306,7 +306,7 @@ def chart_fee_tolerance():
     current_fee = [5500, 5500, 5500, 3000]
     tolerance = [6176, 6167, 5800, 5000]
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(10, 7))
 
     x = np.arange(len(generations))
     width = 0.35
@@ -314,27 +314,29 @@ def chart_fee_tolerance():
     bars1 = ax.bar(x - width/2, current_fee, width, label='現行会費', color=COLORS['gray'], edgecolor='white')
     bars2 = ax.bar(x + width/2, tolerance, width, label='許容額平均', color=COLORS['secondary'], edgecolor='white')
 
-    # 差額を表示
-    for i, (curr, tol) in enumerate(zip(current_fee, tolerance)):
-        diff = tol - curr
-        if diff > 0:
-            ax.annotate(f'+{diff:,}円', xy=(i + width/2, tol + 100),
-                       ha='center', fontsize=10, fontweight='bold', color=COLORS['success'])
-
     ax.set_ylabel('金額（円）', fontsize=12, fontweight='bold')
     ax.set_title('世代別 会費許容額 vs 現行会費', fontsize=16, fontweight='bold', pad=20)
     ax.set_xticks(x)
     ax.set_xticklabels(generations, fontsize=11)
     ax.legend(loc='upper right', fontsize=10)
-    ax.set_ylim(0, 7500)
+    ax.set_ylim(0, 8000)
 
-    # 値を表示
+    # 現行会費の値を表示（バーの上）
     for bar in bars1:
-        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 100,
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 80,
                 f'¥{int(bar.get_height()):,}', ha='center', fontsize=9, color=COLORS['gray'])
+
+    # 許容額の値を表示（バーの上）
     for bar in bars2:
-        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 100,
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 80,
                 f'¥{int(bar.get_height()):,}', ha='center', fontsize=9, color=COLORS['secondary'])
+
+    # 差額を表示（さらに上に配置）
+    for i, (curr, tol) in enumerate(zip(current_fee, tolerance)):
+        diff = tol - curr
+        if diff > 0:
+            ax.annotate(f'+{diff:,}円', xy=(i + width/2, tol + 450),
+                       ha='center', fontsize=11, fontweight='bold', color=COLORS['success'])
 
     save_figure(fig, 'fee_tolerance.png')
 
