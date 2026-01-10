@@ -1115,10 +1115,10 @@ def chart_bubble_evaluation():
     save_figure(fig, 'bubble_evaluation.png')
 
 # ===========================================
-# 24. エリアチャート（申込の累積推移）
+# 24. 折れ線グラフ（世代別申込推移）
 # ===========================================
 def chart_application_area():
-    """申込の累積推移（エリアチャート、世代別）"""
+    """申込の累積推移（折れ線グラフ、世代別）"""
     weeks = ['9/21', '10/5', '10/19', '11/2', '11/16', '11/30', '12/7', '12/14', '12/21', '12/28']
 
     # 世代別の累積データ（概算）
@@ -1127,19 +1127,30 @@ def chart_application_area():
     gen21_30 = [3, 5, 8, 10, 14, 22, 35, 70, 100, 104]
     gen31_37 = [1, 2, 2, 2, 3, 6, 9, 20, 30, 33]
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-    ax.fill_between(weeks, gen1_10, alpha=0.8, label='1〜10期', color=COLORS['primary'])
-    ax.fill_between(weeks, gen11_20, alpha=0.6, label='11〜20期', color=COLORS['secondary'])
-    ax.fill_between(weeks, gen21_30, alpha=0.5, label='21〜30期', color='#63B3ED')
-    ax.fill_between(weeks, gen31_37, alpha=0.4, label='31〜37期', color='#90CDF4')
+    # 折れ線グラフで各世代を独立表示
+    ax.plot(weeks, gen1_10, 'o-', linewidth=2.5, markersize=6, label='1〜10期（209名）',
+            color=COLORS['primary'])
+    ax.plot(weeks, gen11_20, 's--', linewidth=2.5, markersize=6, label='11〜20期（187名）',
+            color=COLORS['secondary'])
+    ax.plot(weeks, gen21_30, '^-.', linewidth=2.5, markersize=6, label='21〜30期（104名）',
+            color=COLORS['success'])
+    ax.plot(weeks, gen31_37, 'D:', linewidth=2.5, markersize=6, label='31〜37期（33名）',
+            color=COLORS['accent'])
 
     ax.set_xlabel('日付', fontsize=11, fontweight='bold')
     ax.set_ylabel('累積申込者数（名）', fontsize=11, fontweight='bold')
-    ax.set_title('世代別 申込推移', fontsize=14, fontweight='bold', pad=15)
-    ax.legend(loc='upper left', fontsize=9)
-    ax.set_ylim(0, 220)
+    ax.set_title('世代別 申込推移 → ベテラン層が終始リード、若手は後半に伸び', fontsize=13, fontweight='bold', pad=15)
+    ax.legend(loc='upper left', fontsize=10)
+    ax.set_ylim(0, 230)
+    ax.grid(True, alpha=0.3)
     plt.xticks(rotation=45)
+
+    # 後半の伸びを注記
+    ax.annotate('12月に急増', xy=(7, 170), xytext=(5, 190),
+               fontsize=10, color=COLORS['primary'],
+               arrowprops=dict(arrowstyle='->', color=COLORS['primary'], lw=1.5))
 
     save_figure(fig, 'application_area.png')
 
