@@ -45,9 +45,9 @@ def setup_style():
     plt.rcParams['ytick.color'] = COLORS['primary']
 
 def save_figure(fig, filename):
-    """図を保存"""
+    """図を保存（サイズ最適化）"""
     filepath = f'images/analysis/{filename}'
-    fig.savefig(filepath, dpi=150, bbox_inches='tight', facecolor='white', edgecolor='none')
+    fig.savefig(filepath, dpi=100, bbox_inches='tight', facecolor='white', edgecolor='none')
     plt.close(fig)
     print(f'Saved: {filepath}')
 
@@ -62,7 +62,7 @@ def chart_participants_by_class():
                     16, 10, 11, 11, 4, 20, 16, 5, 4, 7,
                     6, 2, 10, 5, 3, 7]
 
-    fig, ax = plt.subplots(figsize=(14, 6))
+    fig, ax = plt.subplots(figsize=(12, 5))
 
     # 世代別に色分け
     colors = []
@@ -118,7 +118,7 @@ def chart_generation_pie():
     colors = [COLORS['primary'], COLORS['secondary'], '#63B3ED', '#90CDF4']
     explode = (0.02, 0.02, 0.02, 0.05)
 
-    fig, ax = plt.subplots(figsize=(8, 8))
+    fig, ax = plt.subplots(figsize=(7, 7))
 
     wedges, texts, autotexts = ax.pie(
         sizes,
@@ -155,7 +155,7 @@ def chart_satisfaction():
     categories = ['時間帯\n(15:00-17:30)', '日程\n(12/28)', '会費妥当性', '料理・ドリンク']
     scores = [4.29, 4.05, 3.90, 3.34]
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(9, 4.5))
 
     # 色を満足度に応じて変更
     colors = []
@@ -208,7 +208,7 @@ def chart_information_source():
     sizes = [83.1, 23.7, 13.6, 5.1, 5.0]
     colors = [COLORS['primary'], COLORS['secondary'], '#63B3ED', '#90CDF4', COLORS['light_gray']]
 
-    fig, ax = plt.subplots(figsize=(9, 7))
+    fig, ax = plt.subplots(figsize=(7, 6))
 
     wedges, texts, autotexts = ax.pie(
         sizes,
@@ -237,7 +237,7 @@ def chart_non_participation_reasons():
     reasons = ['仕事の都合', '県外・海外在住', '広報不足', '土曜日希望', '家庭の事情', '会費が高い']
     percentages = [39.0, 35.6, 20.3, 8.5, 15.0, 6.8]
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(figsize=(9, 4.5))
 
     y_pos = np.arange(len(reasons))
     bars = ax.barh(y_pos, percentages, color=COLORS['secondary'], height=0.6, edgecolor='white')
@@ -276,7 +276,7 @@ def chart_desired_programs():
     ]
     percentages = [49.2, 47.5, 42.4, 40.7, 35.6, 32.2]
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(9, 5))
 
     y_pos = np.arange(len(programs))
     colors = [COLORS['primary'] if p >= 45 else COLORS['secondary'] for p in percentages]
@@ -306,7 +306,7 @@ def chart_fee_tolerance():
     current_fee = [5500, 5500, 5500, 3000]
     tolerance = [6176, 6167, 5800, 5000]
 
-    fig, ax = plt.subplots(figsize=(10, 7))
+    fig, ax = plt.subplots(figsize=(9, 6))
 
     x = np.arange(len(generations))
     width = 0.35
@@ -356,7 +356,7 @@ def chart_cooperation_willingness():
     counts = [17, 14, 10, 6, 6, 3]
     percentages = [63.0, 51.9, 37.0, 22.2, 22.2, 11.1]
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(9, 5))
 
     y_pos = np.arange(len(items))
     colors = [COLORS['primary'] if p >= 50 else COLORS['secondary'] if p >= 30 else '#63B3ED' for p in percentages]
@@ -385,7 +385,7 @@ def chart_involvement_effect():
     types = ['メンター＋運営\n両方', '本編登壇者\nあり', 'メンター\nのみ', '運営のみ', '関与なし\n（1-30期）', '関与なし\n（31-36期）']
     avg_participants = [23.8, 16.2, 16.0, 11.4, 9.0, 3.7]
 
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(9, 5))
 
     x = np.arange(len(types))
     colors = [COLORS['success'] if p >= 20 else COLORS['secondary'] if p >= 15 else COLORS['warning'] if p >= 10 else COLORS['accent'] for p in avg_participants]
@@ -410,12 +410,255 @@ def chart_involvement_effect():
     save_figure(fig, 'involvement_effect.png')
 
 # ===========================================
+# 10. 申込推移の時系列グラフ
+# ===========================================
+def chart_application_timeline():
+    """申込推移の時系列"""
+    weeks = ['9/21\n開始', '10/5', '10/19', '11/2', '11/16', '11/30', '12/7', '12/14', '12/21', '12/28\n当日']
+    cumulative = [17, 35, 55, 80, 114, 183, 264, 415, 523, 533]
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+
+    ax.fill_between(range(len(weeks)), cumulative, alpha=0.3, color=COLORS['secondary'])
+    ax.plot(range(len(weeks)), cumulative, marker='o', linewidth=2.5,
+            color=COLORS['primary'], markersize=8, markerfacecolor='white', markeredgewidth=2)
+
+    # キーポイントにラベル
+    key_points = [(0, 17, '開始'), (5, 183, '後半開始'), (7, 415, '締切前日'), (9, 533, '最終')]
+    for idx, val, label in key_points:
+        ax.annotate(f'{label}\n{val}名', xy=(idx, val), xytext=(idx, val + 40),
+                   ha='center', fontsize=9, fontweight='bold', color=COLORS['primary'])
+
+    ax.set_xticks(range(len(weeks)))
+    ax.set_xticklabels(weeks, fontsize=9)
+    ax.set_ylabel('累積申込者数（名）', fontsize=11, fontweight='bold')
+    ax.set_title('申込推移（時系列）', fontsize=14, fontweight='bold', pad=15)
+    ax.set_ylim(0, 600)
+    ax.grid(True, alpha=0.3)
+
+    # 締切日に縦線
+    ax.axvline(x=8, color=COLORS['accent'], linestyle='--', linewidth=1.5, alpha=0.7)
+    ax.text(8.1, 100, '締切12/22', fontsize=9, color=COLORS['accent'], rotation=90, va='bottom')
+
+    save_figure(fig, 'application_timeline.png')
+
+# ===========================================
+# 11. 協賛効果の比較
+# ===========================================
+def chart_sponsorship_effect():
+    """協賛あり vs なしの比較"""
+    categories = ['平均参加者数\n（名/期）', '料理満足度\n（/5.0）', '会費満足度\n（/5.0）']
+    with_sponsor = [21.2, 3.50, 4.13]
+    without_sponsor = [10.2, 3.05, 3.48]
+
+    fig, ax = plt.subplots(figsize=(9, 5))
+
+    x = np.arange(len(categories))
+    width = 0.35
+
+    bars1 = ax.bar(x - width/2, with_sponsor, width, label='協賛あり（15期）',
+                   color=COLORS['success'], edgecolor='white')
+    bars2 = ax.bar(x + width/2, without_sponsor, width, label='協賛なし（21期）',
+                   color=COLORS['gray'], edgecolor='white')
+
+    ax.set_ylabel('値', fontsize=11, fontweight='bold')
+    ax.set_title('協賛の有無による参加者数・満足度の差', fontsize=14, fontweight='bold', pad=15)
+    ax.set_xticks(x)
+    ax.set_xticklabels(categories, fontsize=10)
+    ax.legend(loc='upper right', fontsize=9)
+
+    # 差を表示
+    for i, (w, wo) in enumerate(zip(with_sponsor, without_sponsor)):
+        diff = w - wo
+        if i == 0:
+            label = f'+{diff:.1f}名\n(+{(diff/wo)*100:.0f}%)'
+        else:
+            label = f'+{diff:.2f}'
+        ax.annotate(label, xy=(i, max(w, wo) + 0.3), ha='center', fontsize=10,
+                   fontweight='bold', color=COLORS['success'])
+
+    ax.set_ylim(0, 26)
+
+    save_figure(fig, 'sponsorship_effect.png')
+
+# ===========================================
+# 12. 傾斜シミュレーション
+# ===========================================
+def chart_fee_simulation():
+    """会費傾斜シミュレーション"""
+    plans = ['現行', '案1\n（推奨）', '案2', '案3']
+    revenues = [285, 317, 326, 306]
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+
+    colors = [COLORS['gray'], COLORS['success'], COLORS['secondary'], COLORS['secondary']]
+    bars = ax.bar(plans, revenues, color=colors, edgecolor='white', width=0.6)
+
+    # 値を表示
+    for bar, rev in zip(bars, revenues):
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 3,
+                f'{rev}万円', ha='center', fontsize=11, fontweight='bold',
+                color=COLORS['primary'])
+
+    # 現行との差
+    for i, (bar, rev) in enumerate(zip(bars, revenues)):
+        if i > 0:
+            diff = rev - 285
+            ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() - 15,
+                    f'+{diff}万円', ha='center', fontsize=10,
+                    color='white', fontweight='bold')
+
+    ax.set_ylabel('期待収入（万円）', fontsize=11, fontweight='bold')
+    ax.set_title('会費傾斜シミュレーション', fontsize=14, fontweight='bold', pad=15)
+    ax.set_ylim(0, 360)
+
+    # 案1（推奨）をハイライト
+    bars[1].set_edgecolor(COLORS['success'])
+    bars[1].set_linewidth(3)
+
+    save_figure(fig, 'fee_simulation.png')
+
+# ===========================================
+# 13. 世代別意欲層の分布
+# ===========================================
+def chart_motivation_by_generation():
+    """世代別の取組意欲の高い層"""
+    generations = ['1〜10期\n（ベテラン）', '11〜20期\n（中堅）', '21〜30期', '31期以降\n（新世代）']
+    motivated = [11, 10, 4, 2]
+    percentages = [40.7, 37.0, 14.8, 7.4]
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+
+    colors = [COLORS['primary'], COLORS['secondary'], '#63B3ED', '#90CDF4']
+    bars = ax.bar(generations, motivated, color=colors, edgecolor='white', width=0.6)
+
+    for bar, val, pct in zip(bars, motivated, percentages):
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.3,
+                f'{val}名\n({pct}%)', ha='center', fontsize=10, fontweight='bold',
+                color=COLORS['primary'])
+
+    ax.set_ylabel('人数（名）', fontsize=11, fontweight='bold')
+    ax.set_title('世代別 取組意欲の高い層（連絡可回答者）', fontsize=14, fontweight='bold', pad=15)
+    ax.set_ylim(0, 15)
+
+    # 78%がベテラン・中堅という注記
+    ax.annotate('ベテラン・中堅で\n78%を占める', xy=(0.5, 11), xytext=(2.5, 13),
+               ha='center', fontsize=10, fontweight='bold', color=COLORS['accent'],
+               arrowprops=dict(arrowstyle='->', color=COLORS['accent'], lw=1.5))
+
+    save_figure(fig, 'motivation_by_generation.png')
+
+# ===========================================
+# 14. 学科別意欲層の分布
+# ===========================================
+def chart_motivation_by_department():
+    """学科別の取組意欲"""
+    departments = ['理数科', '芸術科', '英語科', '学術探究科']
+    total = [36, 13, 8, 1]
+    motivated = [18, 5, 3, 1]
+    rates = [50.0, 38.5, 37.5, 100.0]
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+
+    x = np.arange(len(departments))
+    width = 0.35
+
+    bars1 = ax.bar(x - width/2, total, width, label='全回答者',
+                   color=COLORS['light_gray'], edgecolor='white')
+    bars2 = ax.bar(x + width/2, motivated, width, label='意欲高い層',
+                   color=COLORS['secondary'], edgecolor='white')
+
+    # 割合を表示
+    for i, (t, m, r) in enumerate(zip(total, motivated, rates)):
+        ax.text(i + width/2, m + 0.5, f'{r:.1f}%', ha='center', fontsize=10,
+               fontweight='bold', color=COLORS['primary'])
+
+    ax.set_ylabel('人数（名）', fontsize=11, fontweight='bold')
+    ax.set_title('学科別 取組意欲の割合', fontsize=14, fontweight='bold', pad=15)
+    ax.set_xticks(x)
+    ax.set_xticklabels(departments, fontsize=10)
+    ax.legend(loc='upper right', fontsize=9)
+    ax.set_ylim(0, 45)
+
+    # 理数科が最多という注記
+    ax.annotate('理数科が最も\n協力意欲が高い', xy=(0, 18), xytext=(1.5, 30),
+               ha='center', fontsize=10, fontweight='bold', color=COLORS['success'],
+               arrowprops=dict(arrowstyle='->', color=COLORS['success'], lw=1.5))
+
+    save_figure(fig, 'motivation_by_department.png')
+
+# ===========================================
+# 15. 締切効果の分析
+# ===========================================
+def chart_deadline_effect():
+    """締切効果の分析"""
+    days = ['12/13', '12/14', '12/15\n(締切)', '12/16', '12/17', '12/22\n(延長締切)']
+    daily_applications = [28, 43, 60, 6, 8, 19]
+
+    fig, ax = plt.subplots(figsize=(9, 5))
+
+    colors = [COLORS['secondary'] if d < 40 else COLORS['accent'] for d in daily_applications]
+    colors[2] = COLORS['accent']  # 締切日
+    colors[5] = COLORS['warning']  # 延長締切日
+
+    bars = ax.bar(days, daily_applications, color=colors, edgecolor='white', width=0.6)
+
+    for bar, val in zip(bars, daily_applications):
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1,
+                f'{val}名', ha='center', fontsize=10, fontweight='bold',
+                color=COLORS['primary'])
+
+    ax.set_ylabel('日別申込者数（名）', fontsize=11, fontweight='bold')
+    ax.set_title('締切前後の申込状況', fontsize=14, fontweight='bold', pad=15)
+    ax.set_ylim(0, 75)
+
+    # 締切効果の注記
+    ax.annotate('締切効果\n通常の1.9倍', xy=(2, 60), xytext=(3.5, 65),
+               ha='center', fontsize=10, fontweight='bold', color=COLORS['accent'],
+               arrowprops=dict(arrowstyle='->', color=COLORS['accent'], lw=1.5))
+
+    ax.annotate('翌日急減', xy=(3, 6), xytext=(4, 25),
+               ha='center', fontsize=9, color=COLORS['gray'],
+               arrowprops=dict(arrowstyle='->', color=COLORS['gray'], lw=1))
+
+    save_figure(fig, 'deadline_effect.png')
+
+# ===========================================
+# 16. 課題別言及数
+# ===========================================
+def chart_issues_count():
+    """自由回答から抽出した課題"""
+    issues = ['料理の不足', '音響問題', '世代間交流', '視認性', '会場の狭さ']
+    counts = [13, 13, 13, 11, 9]
+
+    fig, ax = plt.subplots(figsize=(8, 4.5))
+
+    colors = [COLORS['accent'] if c >= 13 else COLORS['warning'] for c in counts]
+    y_pos = np.arange(len(issues))
+    bars = ax.barh(y_pos, counts, color=colors, height=0.6, edgecolor='white')
+
+    for bar, cnt in zip(bars, counts):
+        ax.text(cnt + 0.3, bar.get_y() + bar.get_height()/2,
+                f'{cnt}回', va='center', fontsize=11, fontweight='bold',
+                color=COLORS['primary'])
+
+    ax.set_yticks(y_pos)
+    ax.set_yticklabels(issues, fontsize=10)
+    ax.set_xlim(0, 18)
+    ax.set_xlabel('言及数（回）', fontsize=11, fontweight='bold')
+    ax.set_title('自由回答から抽出した課題 TOP5', fontsize=14, fontweight='bold', pad=15)
+    ax.invert_yaxis()
+
+    save_figure(fig, 'issues_count.png')
+
+# ===========================================
 # メイン処理
 # ===========================================
 if __name__ == '__main__':
     print('Generating charts...')
     setup_style()
 
+    # 基本チャート
     chart_participants_by_class()
     chart_generation_pie()
     chart_satisfaction()
@@ -425,5 +668,14 @@ if __name__ == '__main__':
     chart_fee_tolerance()
     chart_cooperation_willingness()
     chart_involvement_effect()
+
+    # 追加チャート
+    chart_application_timeline()
+    chart_sponsorship_effect()
+    chart_fee_simulation()
+    chart_motivation_by_generation()
+    chart_motivation_by_department()
+    chart_deadline_effect()
+    chart_issues_count()
 
     print('All charts generated successfully!')
