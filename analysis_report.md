@@ -76,11 +76,11 @@
 
 ### 1.1 期別参加者数
 
-![期別参加者数](images/analysis/participants_by_class.png)
+<img src="images/analysis/participants_by_class.png" alt="期別参加者数" style="max-width: 100%; width: 700px;">
 
 ### 1.2 世代グループ別参加状況
 
-![世代グループ別参加状況](images/analysis/generation_distribution.png)
+<img src="images/analysis/generation_distribution.png" alt="世代グループ別参加状況" style="max-width: 100%; width: 450px;">
 
 | グループ | 参加者数 | 構成比 | 平均/期 |
 |---------|---------|-------|--------|
@@ -115,7 +115,7 @@
 
 ### 1.4 登壇者・運営メンバーの有無と参加者数の関係
 
-![運営関与タイプ別 平均参加者数](images/analysis/involvement_effect.png)
+<img src="images/analysis/involvement_effect.png" alt="運営関与タイプ別 平均参加者数" style="max-width: 100%; width: 600px;">
 
 今回、本編登壇者・事前イベントメンター・運営メンバーを期や学科を分散させて配置した。
 その関与の有無と参加者数の関係を分析した。
@@ -251,6 +251,8 @@
 
 10月末時点の申込者からメンター・運営を選んだため、早期申込者の有無がその後の参加者増加に影響したかを分析した。
 
+<img src="images/analysis/application_timeline.png" alt="申込推移（時系列）" style="max-width: 100%; width: 650px;">
+
 **全体の週別推移**
 
 ```
@@ -323,6 +325,8 @@
 ### 1.6 事前申込締切日の最適化分析
 
 運営施策として「11月末までに申込を」と周知し、当初締切12/15を12/22に延長した。この効果と最適な締切日を分析。
+
+<img src="images/analysis/deadline_effect.png" alt="締切前後の申込状況" style="max-width: 100%; width: 600px;">
 
 **週別申込推移と締切効果**
 
@@ -431,6 +435,8 @@
 
 法人・個人協賛の期別データを分析し、参加者数・満足度との関係を調査した。
 
+<img src="images/analysis/sponsorship_effect.png" alt="協賛効果の比較" style="max-width: 100%; width: 600px;">
+
 **協賛のある期（15期）**
 
 | 期 | 参加者 | 協賛額 | 協賛件数 |
@@ -518,7 +524,7 @@
 
 ### 2.2 さらに細分化した分析
 
-![会費許容額 vs 現行会費](images/analysis/fee_tolerance.png)
+<img src="images/analysis/fee_tolerance.png" alt="会費許容額 vs 現行会費" style="max-width: 100%; width: 600px;">
 
 | グループ | 参加者 | 会費満足度 | 許容額 | 内容重視派 | 現行との差 |
 |---------|-------|----------|-------|----------|----------|
@@ -555,6 +561,8 @@
 
 ### 2.4 傾斜シミュレーション
 
+<img src="images/analysis/fee_simulation.png" alt="傾斜シミュレーション" style="max-width: 100%; width: 550px;">
+
 | 案 | 会費設計 | 収入 | 現行比 |
 |---|---------|-----|-------|
 | 現行 | 1-30期:5,500円 / 31-37期:3,000円 | 285万円 | - |
@@ -579,7 +587,7 @@
 
 ### 3.1 評価項目別スコア
 
-![満足度評価](images/analysis/satisfaction_scores.png)
+<img src="images/analysis/satisfaction_scores.png" alt="満足度評価" style="max-width: 100%; width: 600px;">
 
 | 項目 | 平均 | 評価 |
 |-----|-----|-----|
@@ -589,6 +597,8 @@
 | **料理・ドリンク** | **3.34** | **最重要課題** |
 
 ### 3.2 自由回答から抽出した課題
+
+<img src="images/analysis/issues_count.png" alt="課題別言及数" style="max-width: 100%; width: 550px;">
 
 | 課題 | 言及数 | 代表的コメント |
 |-----|-------|--------------|
@@ -648,7 +658,7 @@
 
 ### 5.1 情報入手経路
 
-![情報入手経路](images/analysis/information_source.png)
+<img src="images/analysis/information_source.png" alt="情報入手経路" style="max-width: 100%; width: 450px;">
 
 | チャネル | 到達率 | 評価 |
 |---------|-------|-----|
@@ -659,7 +669,7 @@
 
 ### 5.2 不参加理由と対応
 
-![不参加理由](images/analysis/non_participation_reasons.png)
+<img src="images/analysis/non_participation_reasons.png" alt="不参加理由" style="max-width: 100%; width: 600px;">
 
 | 不参加理由 | 割合 | 対応策 |
 |-----------|-----|-------|
@@ -674,7 +684,7 @@
 
 ### 6.1 希望プログラムTOP8
 
-![希望プログラム](images/analysis/desired_programs.png)
+<img src="images/analysis/desired_programs.png" alt="希望プログラム" style="max-width: 100%; width: 600px;">
 
 | プログラム | 希望率 |
 |----------|-------|
@@ -911,6 +921,8 @@
 
 #### 学科別の傾向
 
+<img src="images/analysis/motivation_by_department.png" alt="学科別 取組意欲の割合" style="max-width: 100%; width: 550px;">
+
 | 学科 | 意欲高い人 | 全回答者 | 割合 |
 |------|-----------|---------|------|
 | **理数科** | 18名 | 36名 | **50.0%** |
@@ -921,6 +933,8 @@
 → **理数科出身者が最も協力意欲が高い**
 
 #### 期生（世代）の傾向
+
+<img src="images/analysis/motivation_by_generation.png" alt="世代別 取組意欲の高い層" style="max-width: 100%; width: 550px;">
 
 | 世代グループ | 意欲高い人数 | 構成比 |
 |-------------|------------|-------|
@@ -933,7 +947,7 @@
 
 #### 協力内容の傾向（意欲高い27名の選択）
 
-![協力内容の傾向](images/analysis/cooperation_willingness.png)
+<img src="images/analysis/cooperation_willingness.png" alt="協力内容の傾向" style="max-width: 100%; width: 600px;">
 
 | 協力内容 | 選択数 | 割合 |
 |---------|-------|------|
