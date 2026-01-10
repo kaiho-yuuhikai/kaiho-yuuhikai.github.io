@@ -61,7 +61,7 @@
 
 <img src="images/analysis/target_gauge.png" alt="現状 vs 目標" style="max-width: 100%; width: 800px;">
 
-<img src="images/analysis/generation_radar.png" alt="世代別特性比較" style="max-width: 100%; width: 800px;">
+<img src="images/analysis/target_roadmap.png" alt="次回目標630名への道筋" style="max-width: 100%; width: 800px;">
 
 ---
 
@@ -617,6 +617,8 @@
 
 <img src="images/analysis/satisfaction_scores.png" alt="満足度評価" style="max-width: 100%; width: 800px;">
 
+<img src="images/analysis/generation_issues.png" alt="世代別課題比較" style="max-width: 100%; width: 800px;">
+
 <img src="images/analysis/satisfaction_heatmap.png" alt="世代別満足度ヒートマップ" style="max-width: 100%; width: 750px;">
 
 | 項目 | 平均 | 評価 |
@@ -653,6 +655,8 @@
 ---
 
 ## 4. 期別の参加者増加施策
+
+<img src="images/analysis/participation_potential.png" alt="参加者増加ポテンシャル" style="max-width: 100%; width: 800px;">
 
 ### 4.1 参加者が少ない期への対策
 
@@ -738,6 +742,8 @@
 ---
 
 ## 7. 施策優先度まとめ
+
+<img src="images/analysis/strategy_priority.png" alt="施策優先度マトリクス" style="max-width: 100%; width: 800px;">
 
 ### 7.1 すぐやるべき（高効果・低コスト）
 

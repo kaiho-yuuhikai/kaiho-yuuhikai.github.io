@@ -652,51 +652,207 @@ def chart_issues_count():
     save_figure(fig, 'issues_count.png')
 
 # ===========================================
-# 17. レーダーチャート（世代別特性比較）
+# 17. 世代別課題比較（グループ化棒グラフ）
 # ===========================================
-def chart_generation_radar():
-    """世代別の特性をレーダーチャートで比較"""
-    from math import pi
+def chart_generation_issues():
+    """世代別の課題を比較し、どこに注力すべきかを示す"""
+    generations = ['1〜10期\n（ベテラン）', '11〜20期\n（中堅）', '21〜30期', '31〜37期\n（若手）']
 
-    categories = ['参加率', '会費満足度', '許容額余地', '内容重視', '協力意欲', '口コミ到達']
-    N = len(categories)
+    # 満足度データ（5段階）
+    food_satisfaction = [3.6, 3.3, 3.2, 3.0]
+    fee_satisfaction = [4.25, 3.81, 3.70, 2.75]
 
-    # 各世代のデータ（0-100にスケール）
-    data = {
-        '1〜10期（ベテラン）': [85, 85, 80, 100, 90, 85],
-        '11〜20期（中堅）': [75, 76, 78, 50, 80, 80],
-        '21〜30期': [50, 74, 35, 0, 45, 75],
-        '31〜37期（若手）': [30, 55, 100, 0, 25, 70],
-    }
+    fig, ax = plt.subplots(figsize=(10, 6))
 
-    angles = [n / float(N) * 2 * pi for n in range(N)]
-    angles += angles[:1]
+    x = np.arange(len(generations))
+    width = 0.35
 
-    fig, ax = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
+    bars1 = ax.bar(x - width/2, food_satisfaction, width, label='料理満足度',
+                   color=COLORS['accent'], edgecolor='white')
+    bars2 = ax.bar(x + width/2, fee_satisfaction, width, label='会費満足度',
+                   color=COLORS['secondary'], edgecolor='white')
 
-    # より区別しやすい色に変更
-    distinct_colors = ['#1A365D', '#E53E3E', '#38A169', '#D69E2E']  # 紺、赤、緑、黄
-    line_styles = ['-', '--', '-.', ':']
-    markers = ['o', 's', '^', 'D']
+    # 目標線
+    ax.axhline(y=4.0, color=COLORS['success'], linestyle='--', linewidth=2, label='目標: 4.0')
 
-    for i, ((gen, values), color) in enumerate(zip(data.items(), distinct_colors)):
-        values = values + values[:1]
-        ax.plot(angles, values, marker=markers[i], linestyle=line_styles[i],
-                linewidth=3, label=gen, color=color, markersize=8)
-        ax.fill(angles, values, alpha=0.1, color=color)
+    # 値を表示
+    for bar in bars1:
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
+                f'{bar.get_height():.1f}', ha='center', fontsize=10, color=COLORS['accent'])
+    for bar in bars2:
+        ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
+                f'{bar.get_height():.1f}', ha='center', fontsize=10, color=COLORS['secondary'])
 
-    ax.set_xticks(angles[:-1])
-    ax.set_xticklabels(categories, fontsize=12, fontweight='bold')
-    ax.set_ylim(0, 100)
-    ax.set_title('世代別 特性比較（レーダーチャート）', fontsize=16, fontweight='bold', pad=25)
-    ax.legend(loc='upper right', bbox_to_anchor=(1.35, 1.05), fontsize=11)
+    ax.set_ylabel('満足度（5段階）', fontsize=11, fontweight='bold')
+    ax.set_title('世代別 満足度比較 → 若手の会費満足度が最重要課題', fontsize=14, fontweight='bold', pad=15)
+    ax.set_xticks(x)
+    ax.set_xticklabels(generations, fontsize=10)
+    ax.legend(loc='upper right', fontsize=10)
+    ax.set_ylim(0, 5)
 
-    # グリッド線を見やすく
-    ax.set_rticks([20, 40, 60, 80, 100])
-    ax.set_yticklabels(['20', '40', '60', '80', '100'], fontsize=9)
-    ax.grid(True, alpha=0.4)
+    # 課題箇所をハイライト
+    ax.annotate('最重要課題\n（2.75）', xy=(3 + width/2, 2.75), xytext=(3.3, 3.5),
+               fontsize=10, fontweight='bold', color=COLORS['accent'],
+               arrowprops=dict(arrowstyle='->', color=COLORS['accent'], lw=2))
 
-    save_figure(fig, 'generation_radar.png')
+    save_figure(fig, 'generation_issues.png')
+
+# ===========================================
+# 17b. 期別参加者増加ポテンシャル
+# ===========================================
+def chart_participation_potential():
+    """各期の参加者増加ポテンシャルを示す"""
+    # 参加者が少ない期と関与の有無
+    classes = ['5期', '6期', '8期', '17期', '25期', '28期', '29期', '32期', '35期']
+    current = [6, 7, 7, 5, 4, 5, 4, 2, 3]
+    avg_with_involvement = [17.3] * len(classes)  # 関与ありの期の平均
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+
+    x = np.arange(len(classes))
+    width = 0.4
+
+    bars = ax.bar(x, current, width, label='現在の参加者数', color=COLORS['gray'], edgecolor='white')
+
+    # 平均との差（増加ポテンシャル）を積み上げ
+    potential = [avg - curr for avg, curr in zip(avg_with_involvement, current)]
+    ax.bar(x, potential, width, bottom=current, label='増加ポテンシャル',
+           color=COLORS['success'], edgecolor='white', alpha=0.7)
+
+    # 値を表示
+    for i, (bar, curr, pot) in enumerate(zip(bars, current, potential)):
+        ax.text(bar.get_x() + bar.get_width()/2, curr/2,
+                f'{curr}', ha='center', fontsize=10, fontweight='bold', color='white')
+        ax.text(bar.get_x() + bar.get_width()/2, curr + pot + 0.5,
+                f'+{pot:.0f}', ha='center', fontsize=9, fontweight='bold', color=COLORS['success'])
+
+    ax.set_ylabel('参加者数（名）', fontsize=11, fontweight='bold')
+    ax.set_title('関与なし期の参加者増加ポテンシャル（メンター・運営配置で+10名/期）', fontsize=13, fontweight='bold', pad=15)
+    ax.set_xticks(x)
+    ax.set_xticklabels(classes, fontsize=10)
+    ax.legend(loc='upper right', fontsize=10)
+    ax.set_ylim(0, 22)
+
+    # 合計増加見込み
+    total_potential = sum(potential)
+    ax.text(0.98, 0.95, f'合計 +{total_potential:.0f}名の増加見込み',
+            transform=ax.transAxes, ha='right', va='top', fontsize=11,
+            fontweight='bold', color=COLORS['success'],
+            bbox=dict(boxstyle='round', facecolor='white', edgecolor=COLORS['success']))
+
+    save_figure(fig, 'participation_potential.png')
+
+# ===========================================
+# 17c. 施策の優先度マトリクス
+# ===========================================
+def chart_strategy_priority():
+    """施策の効果とコストを比較し、優先度を示す"""
+    strategies = [
+        ('期別連絡網整備', 50, 5, '高'),
+        ('申込状況公開', 30, 2, '高'),
+        ('会費傾斜調整', 32, 0, '高'),
+        ('料理1.5倍増量', 40, 40, '中'),
+        ('音響設備強化', 30, 10, '中'),
+        ('会場変更', 20, 30, '低'),
+        ('個人協賛導入', 8, 3, '中'),
+    ]
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    for name, effect, cost, priority in strategies:
+        if priority == '高':
+            color = COLORS['success']
+            size = 300
+        elif priority == '中':
+            color = COLORS['warning']
+            size = 200
+        else:
+            color = COLORS['gray']
+            size = 150
+
+        ax.scatter(cost, effect, s=size, c=color, alpha=0.7, edgecolors='white', linewidth=2)
+        ax.annotate(name, xy=(cost, effect), xytext=(5, 5), textcoords='offset points',
+                   fontsize=9, color=COLORS['primary'])
+
+    # 象限を分ける線
+    ax.axhline(y=30, color=COLORS['light_gray'], linestyle='--', linewidth=1)
+    ax.axvline(x=15, color=COLORS['light_gray'], linestyle='--', linewidth=1)
+
+    # 象限ラベル
+    ax.text(5, 45, '★ 最優先\n（高効果・低コスト）', fontsize=10, fontweight='bold',
+            color=COLORS['success'], ha='center')
+    ax.text(35, 45, '計画的実施\n（高効果・高コスト）', fontsize=10,
+            color=COLORS['warning'], ha='center')
+    ax.text(5, 15, '余裕があれば', fontsize=10, color=COLORS['gray'], ha='center')
+    ax.text(35, 15, '優先度低', fontsize=10, color=COLORS['gray'], ha='center')
+
+    ax.set_xlabel('コスト（万円）', fontsize=11, fontweight='bold')
+    ax.set_ylabel('効果（参加者増 or 万円）', fontsize=11, fontweight='bold')
+    ax.set_title('施策の優先度マトリクス → 左上の施策から着手', fontsize=14, fontweight='bold', pad=15)
+    ax.set_xlim(-5, 50)
+    ax.set_ylim(0, 60)
+    ax.grid(True, alpha=0.3)
+
+    # 凡例
+    from matplotlib.patches import Patch
+    legend_elements = [
+        Patch(facecolor=COLORS['success'], label='優先度：高'),
+        Patch(facecolor=COLORS['warning'], label='優先度：中'),
+        Patch(facecolor=COLORS['gray'], label='優先度：低'),
+    ]
+    ax.legend(handles=legend_elements, loc='lower right', fontsize=9)
+
+    save_figure(fig, 'strategy_priority.png')
+
+# ===========================================
+# 17d. 次回目標達成への道筋
+# ===========================================
+def chart_target_roadmap():
+    """630名達成へのロードマップを示す"""
+    generations = ['1〜10期', '11〜20期', '21〜30期', '31〜37期']
+    current = [209, 187, 104, 33]
+    target = [230, 210, 130, 60]
+    increase = [t - c for t, c in zip(target, current)]
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    x = np.arange(len(generations))
+    width = 0.5
+
+    # 現状
+    bars1 = ax.bar(x, current, width, label='現状（533名）', color=COLORS['gray'], edgecolor='white')
+    # 増加分
+    bars2 = ax.bar(x, increase, width, bottom=current, label='目標増加分（+97名）',
+                   color=COLORS['success'], edgecolor='white', alpha=0.8)
+
+    # 値を表示
+    for i, (curr, inc, tgt) in enumerate(zip(current, increase, target)):
+        ax.text(i, curr/2, f'{curr}', ha='center', va='center', fontsize=11, fontweight='bold', color='white')
+        if inc > 0:
+            ax.text(i, curr + inc/2, f'+{inc}', ha='center', va='center', fontsize=10, fontweight='bold', color='white')
+        ax.text(i, tgt + 5, f'→{tgt}', ha='center', fontsize=10, fontweight='bold', color=COLORS['primary'])
+
+    ax.set_ylabel('参加者数（名）', fontsize=11, fontweight='bold')
+    ax.set_title('次回目標630名への道筋（世代別）', fontsize=14, fontweight='bold', pad=15)
+    ax.set_xticks(x)
+    ax.set_xticklabels(generations, fontsize=11)
+    ax.legend(loc='upper right', fontsize=10)
+    ax.set_ylim(0, 270)
+
+    # 主要施策を注記
+    strategies = [
+        'プログラム充実\n会費増額',
+        '期別連絡網\nメンター配置',
+        '連絡網+SNS\nメンター配置',
+        '内容改善\nInstagram強化'
+    ]
+    for i, strategy in enumerate(strategies):
+        ax.text(i, -25, strategy, ha='center', fontsize=8, color=COLORS['secondary'],
+               style='italic')
+
+    ax.set_xlim(-0.6, 3.6)
+
+    save_figure(fig, 'target_roadmap.png')
 
 # ===========================================
 # 18. 散布図（早期申込と最終参加者の相関）
@@ -1055,8 +1211,11 @@ if __name__ == '__main__':
     chart_deadline_effect()
     chart_issues_count()
 
-    # 新しい種類のチャート
-    chart_generation_radar()
+    # 施策示唆のチャート
+    chart_generation_issues()
+    chart_participation_potential()
+    chart_strategy_priority()
+    chart_target_roadmap()
     chart_early_final_scatter()
     chart_revenue_structure()
     chart_satisfaction_heatmap()
