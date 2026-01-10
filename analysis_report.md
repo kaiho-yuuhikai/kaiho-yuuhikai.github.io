@@ -59,6 +59,10 @@
 | 推定会費収入 | **約285万円** |
 | 料理満足度 | **3.34/5.0**（最重要課題） |
 
+<img src="images/analysis/target_gauge.png" alt="現状 vs 目標" style="max-width: 100%; width: 700px;">
+
+<img src="images/analysis/generation_radar.png" alt="世代別特性比較" style="max-width: 100%; width: 500px;">
+
 ---
 
 ## 現行会費体系
@@ -253,6 +257,8 @@
 
 <img src="images/analysis/application_timeline.png" alt="申込推移（時系列）" style="max-width: 100%; width: 650px;">
 
+<img src="images/analysis/application_area.png" alt="世代別申込推移" style="max-width: 100%; width: 650px;">
+
 **全体の週別推移**
 
 ```
@@ -275,6 +281,9 @@
 → 早期申込者がいない期: 5, 6, 17, 19, 22, 23, 25, 28, 29, 31, 34, 35期
 
 **早期申込数と最終参加者数の相関**
+
+<img src="images/analysis/early_final_scatter.png" alt="早期申込 vs 最終参加者" style="max-width: 100%; width: 600px;">
+
 - 相関係数: **0.621**（強い正の相関）
 - 早期に申し込む「意欲的なメンバー」がいる期は、最終的な参加者も多い
 
@@ -491,6 +500,8 @@
 
 **協賛+メンター+運営のトリプル効果**
 
+<img src="images/analysis/bubble_evaluation.png" alt="期別総合評価（バブルチャート）" style="max-width: 100%; width: 600px;">
+
 | 期 | 参加者 | 協賛額 | メンター | 運営 |
 |---|-------|--------|--------|------|
 | 3期 | **45名** | ¥120,000 | ○ | ○ |
@@ -606,6 +617,8 @@
 
 <img src="images/analysis/satisfaction_scores.png" alt="満足度評価" style="max-width: 100%; width: 600px;">
 
+<img src="images/analysis/satisfaction_heatmap.png" alt="世代別満足度ヒートマップ" style="max-width: 100%; width: 550px;">
+
 | 項目 | 平均 | 評価 |
 |-----|-----|-----|
 | 時間帯(15:00-17:30) | **4.29** | 良好 |
@@ -713,6 +726,8 @@
 | スマホ参加型企画（クイズ等） | 32.2% |
 
 ### 6.2 開催条件の希望
+
+<img src="images/analysis/opening_conditions.png" alt="開催希望条件" style="max-width: 100%; width: 700px;">
 
 | 項目 | 最多回答 | 割合 |
 |-----|---------|-----|
@@ -886,6 +901,10 @@
 | 楽観的 | 148名 | ¥118,400 | 28% |
 
 **提案3: 両方を併用した場合**
+
+<img src="images/analysis/revenue_structure.png" alt="収益構造の比較" style="max-width: 100%; width: 550px;">
+
+<img src="images/analysis/revenue_waterfall.png" alt="増収施策の積み上げ効果" style="max-width: 100%; width: 650px;">
 
 | 施策 | 追加運営費 | 1人あたり |
 |-----|----------|----------|

@@ -652,6 +652,373 @@ def chart_issues_count():
     save_figure(fig, 'issues_count.png')
 
 # ===========================================
+# 17. レーダーチャート（世代別特性比較）
+# ===========================================
+def chart_generation_radar():
+    """世代別の特性をレーダーチャートで比較"""
+    from math import pi
+
+    categories = ['参加率', '会費満足度', '許容額余地', '内容重視', '協力意欲', '口コミ到達']
+    N = len(categories)
+
+    # 各世代のデータ（0-100にスケール）
+    data = {
+        '1〜10期': [85, 85, 80, 100, 90, 85],
+        '11〜20期': [75, 76, 78, 50, 80, 80],
+        '21〜30期': [50, 74, 35, 0, 45, 75],
+        '31〜37期': [30, 55, 100, 0, 25, 70],
+    }
+
+    angles = [n / float(N) * 2 * pi for n in range(N)]
+    angles += angles[:1]
+
+    fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
+
+    colors = [COLORS['primary'], COLORS['secondary'], '#63B3ED', '#90CDF4']
+    for (gen, values), color in zip(data.items(), colors):
+        values = values + values[:1]
+        ax.plot(angles, values, 'o-', linewidth=2, label=gen, color=color)
+        ax.fill(angles, values, alpha=0.15, color=color)
+
+    ax.set_xticks(angles[:-1])
+    ax.set_xticklabels(categories, fontsize=10)
+    ax.set_ylim(0, 100)
+    ax.set_title('世代別 特性比較（レーダーチャート）', fontsize=14, fontweight='bold', pad=20)
+    ax.legend(loc='upper right', bbox_to_anchor=(1.3, 1.0), fontsize=9)
+
+    save_figure(fig, 'generation_radar.png')
+
+# ===========================================
+# 18. 散布図（早期申込と最終参加者の相関）
+# ===========================================
+def chart_early_final_scatter():
+    """早期申込数と最終参加者数の相関"""
+    # 各期のデータ（早期申込数, 最終参加者数）
+    early = [10, 8, 6, 9, 0, 0, 5, 3, 4, 4, 4, 6, 9, 3, 9, 3, 0, 4, 0, 5, 3, 0, 0, 4, 0, 5, 4, 2, 1, 2, 2, 1, 3, 0, 0, 2]
+    final = [30, 32, 45, 26, 6, 7, 19, 7, 16, 21, 23, 28, 27, 10, 25, 13, 5, 19, 9, 28, 16, 10, 11, 11, 4, 20, 16, 5, 4, 7, 6, 2, 10, 5, 3, 7]
+
+    fig, ax = plt.subplots(figsize=(9, 6))
+
+    # 世代別に色分け
+    colors_list = []
+    for i in range(36):
+        if i < 10:
+            colors_list.append(COLORS['primary'])
+        elif i < 20:
+            colors_list.append(COLORS['secondary'])
+        elif i < 30:
+            colors_list.append('#63B3ED')
+        else:
+            colors_list.append('#90CDF4')
+
+    ax.scatter(early, final, c=colors_list, s=100, alpha=0.7, edgecolors='white', linewidth=1)
+
+    # 回帰直線
+    z = np.polyfit(early, final, 1)
+    p = np.poly1d(z)
+    x_line = np.linspace(0, 12, 100)
+    ax.plot(x_line, p(x_line), '--', color=COLORS['accent'], linewidth=2, label=f'回帰直線 (r=0.62)')
+
+    # 特筆すべき点にラベル
+    ax.annotate('3期', xy=(6, 45), xytext=(7, 47), fontsize=9, fontweight='bold', color=COLORS['accent'])
+    ax.annotate('1期', xy=(10, 30), xytext=(10.5, 32), fontsize=9, color=COLORS['primary'])
+
+    ax.set_xlabel('早期申込者数（10月末時点）', fontsize=11, fontweight='bold')
+    ax.set_ylabel('最終参加者数', fontsize=11, fontweight='bold')
+    ax.set_title('早期申込数 vs 最終参加者数（期別）', fontsize=14, fontweight='bold', pad=15)
+    ax.legend(loc='upper left', fontsize=9)
+    ax.set_xlim(-0.5, 12)
+    ax.set_ylim(0, 50)
+    ax.grid(True, alpha=0.3)
+
+    # 凡例
+    from matplotlib.patches import Patch
+    legend_elements = [
+        Patch(facecolor=COLORS['primary'], label='1〜10期'),
+        Patch(facecolor=COLORS['secondary'], label='11〜20期'),
+        Patch(facecolor='#63B3ED', label='21〜30期'),
+        Patch(facecolor='#90CDF4', label='31〜36期'),
+    ]
+    ax.legend(handles=legend_elements, loc='lower right', fontsize=9)
+
+    save_figure(fig, 'early_final_scatter.png')
+
+# ===========================================
+# 19. 積み上げ棒グラフ（収益構造）
+# ===========================================
+def chart_revenue_structure():
+    """収益構造の積み上げ棒グラフ"""
+    categories = ['現行', '案1\n（推奨）', '案1+\n個人協賛']
+    ticket = [285, 317, 317]
+    sponsorship = [0, 0, 8]
+    allocation = [0, 0, 25]
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+
+    x = np.arange(len(categories))
+    width = 0.5
+
+    p1 = ax.bar(x, ticket, width, label='チケット収入', color=COLORS['primary'], edgecolor='white')
+    p2 = ax.bar(x, sponsorship, width, bottom=ticket, label='個人協賛', color=COLORS['secondary'], edgecolor='white')
+    p3 = ax.bar(x, allocation, width, bottom=[t+s for t,s in zip(ticket, sponsorship)],
+                label='協賛金充当', color=COLORS['success'], edgecolor='white')
+
+    # 合計値を表示
+    totals = [t+s+a for t,s,a in zip(ticket, sponsorship, allocation)]
+    for i, total in enumerate(totals):
+        ax.text(i, total + 5, f'{total}万円', ha='center', fontsize=11, fontweight='bold', color=COLORS['primary'])
+
+    ax.set_ylabel('収入（万円）', fontsize=11, fontweight='bold')
+    ax.set_title('収益構造の比較', fontsize=14, fontweight='bold', pad=15)
+    ax.set_xticks(x)
+    ax.set_xticklabels(categories, fontsize=10)
+    ax.legend(loc='upper left', fontsize=9)
+    ax.set_ylim(0, 380)
+
+    # 増収額の注記
+    ax.annotate('+32万円', xy=(1, 317), xytext=(1.5, 340),
+               ha='center', fontsize=10, fontweight='bold', color=COLORS['success'],
+               arrowprops=dict(arrowstyle='->', color=COLORS['success'], lw=1.5))
+    ax.annotate('+65万円', xy=(2, 350), xytext=(2, 370),
+               ha='center', fontsize=10, fontweight='bold', color=COLORS['success'])
+
+    save_figure(fig, 'revenue_structure.png')
+
+# ===========================================
+# 20. ヒートマップ（世代×満足度項目）
+# ===========================================
+def chart_satisfaction_heatmap():
+    """世代別満足度のヒートマップ"""
+    generations = ['1〜10期', '11〜20期', '21〜30期', '31〜37期']
+    items = ['時間帯', '日程', '会費', '料理']
+
+    # 満足度データ (4世代 x 4項目)
+    data = np.array([
+        [4.5, 4.2, 4.25, 3.6],
+        [4.3, 4.1, 3.81, 3.3],
+        [4.2, 3.9, 3.70, 3.2],
+        [4.0, 3.8, 2.75, 3.0],
+    ])
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+
+    im = ax.imshow(data, cmap='RdYlGn', aspect='auto', vmin=2.5, vmax=5.0)
+
+    ax.set_xticks(np.arange(len(items)))
+    ax.set_yticks(np.arange(len(generations)))
+    ax.set_xticklabels(items, fontsize=10)
+    ax.set_yticklabels(generations, fontsize=10)
+
+    # 各セルに値を表示
+    for i in range(len(generations)):
+        for j in range(len(items)):
+            color = 'white' if data[i, j] < 3.5 else 'black'
+            ax.text(j, i, f'{data[i, j]:.2f}', ha='center', va='center',
+                   fontsize=11, fontweight='bold', color=color)
+
+    ax.set_title('世代別 満足度ヒートマップ', fontsize=14, fontweight='bold', pad=15)
+
+    # カラーバー
+    cbar = ax.figure.colorbar(im, ax=ax, shrink=0.8)
+    cbar.ax.set_ylabel('満足度（5段階）', rotation=-90, va='bottom', fontsize=10)
+
+    save_figure(fig, 'satisfaction_heatmap.png')
+
+# ===========================================
+# 21. ウォーターフォールチャート（増収施策効果）
+# ===========================================
+def chart_revenue_waterfall():
+    """増収施策のウォーターフォールチャート"""
+    labels = ['現行収入', '会費傾斜\n（1-10期）', '会費傾斜\n（11-20期）', '若手微増', '個人協賛', '協賛充当', '目標収入']
+    values = [285, 21, 9, 2, 8, 25, 0]  # 最後は計算で埋める
+
+    # 累積計算
+    cumulative = [285]
+    for v in values[1:-1]:
+        cumulative.append(cumulative[-1] + v)
+    cumulative.append(cumulative[-1])  # 最終値
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+
+    # バーの開始位置と高さ
+    starts = [0] + cumulative[:-1]
+    colors = [COLORS['primary']] + [COLORS['success']] * (len(values) - 2) + [COLORS['secondary']]
+
+    bars = ax.bar(labels, values[:-1] + [cumulative[-1]], bottom=[0] + [cumulative[i-1] for i in range(1, len(values)-1)] + [0],
+                  color=colors, edgecolor='white', width=0.6)
+
+    # 最初と最後のバーは累積値として表示
+    bars[0].set_height(285)
+    bars[-1].set_height(cumulative[-1])
+
+    # 接続線
+    for i in range(len(cumulative) - 1):
+        ax.plot([i + 0.3, i + 0.7], [cumulative[i], cumulative[i]], 'k--', linewidth=1, alpha=0.5)
+
+    # 値を表示
+    for i, (bar, val) in enumerate(zip(bars, values[:-1] + [cumulative[-1]])):
+        if i == 0 or i == len(bars) - 1:
+            ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 3,
+                    f'{int(bar.get_height())}万円', ha='center', fontsize=10, fontweight='bold', color=COLORS['primary'])
+        else:
+            ax.text(bar.get_x() + bar.get_width()/2, cumulative[i] + 3,
+                    f'+{val}', ha='center', fontsize=9, fontweight='bold', color=COLORS['success'])
+
+    ax.set_ylabel('収入（万円）', fontsize=11, fontweight='bold')
+    ax.set_title('増収施策の積み上げ効果', fontsize=14, fontweight='bold', pad=15)
+    ax.set_ylim(0, 380)
+
+    save_figure(fig, 'revenue_waterfall.png')
+
+# ===========================================
+# 22. ドーナツチャート（開催希望条件）
+# ===========================================
+def chart_opening_conditions():
+    """開催希望条件のドーナツチャート"""
+    fig, axes = plt.subplots(1, 3, figsize=(12, 4))
+
+    # 開催頻度
+    freq_labels = ['5年に1回', '3年に1回', '毎年', 'その他']
+    freq_sizes = [52.5, 30.5, 10.2, 6.8]
+    axes[0].pie(freq_sizes, labels=freq_labels, autopct='%1.1f%%', startangle=90,
+                colors=[COLORS['primary'], COLORS['secondary'], '#63B3ED', COLORS['light_gray']],
+                wedgeprops=dict(width=0.5, edgecolor='white'), textprops={'fontsize': 9})
+    axes[0].set_title('開催頻度', fontsize=12, fontweight='bold')
+
+    # 開催時期
+    time_labels = ['年末年始', '夏休み', 'GW', 'その他']
+    time_sizes = [81.4, 10.2, 5.1, 3.3]
+    axes[1].pie(time_sizes, labels=time_labels, autopct='%1.1f%%', startangle=90,
+                colors=[COLORS['primary'], COLORS['secondary'], '#63B3ED', COLORS['light_gray']],
+                wedgeprops=dict(width=0.5, edgecolor='white'), textprops={'fontsize': 9})
+    axes[1].set_title('開催時期', fontsize=12, fontweight='bold')
+
+    # 曜日
+    day_labels = ['土曜日', '日曜日', '平日', '不問']
+    day_sizes = [33.9, 28.8, 5.1, 32.2]
+    axes[2].pie(day_sizes, labels=day_labels, autopct='%1.1f%%', startangle=90,
+                colors=[COLORS['primary'], COLORS['secondary'], '#63B3ED', COLORS['light_gray']],
+                wedgeprops=dict(width=0.5, edgecolor='white'), textprops={'fontsize': 9})
+    axes[2].set_title('希望曜日', fontsize=12, fontweight='bold')
+
+    fig.suptitle('開催希望条件', fontsize=14, fontweight='bold', y=1.05)
+    plt.tight_layout()
+
+    save_figure(fig, 'opening_conditions.png')
+
+# ===========================================
+# 23. バブルチャート（期別の総合評価）
+# ===========================================
+def chart_bubble_evaluation():
+    """期別の総合評価（バブルチャート）"""
+    # データ: (参加者数, 満足度, 協賛額/万円)
+    data = {
+        '3期': (45, 4.5, 12),
+        '1期': (30, 4.0, 10),
+        '2期': (32, 3.6, 1),
+        '13期': (27, 3.8, 20),
+        '4期': (26, 3.8, 13.7),
+        '20期': (28, 3.6, 9.7),
+        '12期': (28, 3.7, 0),
+        '15期': (25, 3.6, 4),
+        '11期': (23, 2.8, 0),
+        '10期': (21, 4.0, 10),
+    }
+
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    for name, (participants, satisfaction, sponsorship) in data.items():
+        size = sponsorship * 30 + 50  # バブルサイズ
+        color = COLORS['primary'] if int(name.replace('期', '')) <= 10 else COLORS['secondary']
+        ax.scatter(participants, satisfaction, s=size, alpha=0.6, color=color, edgecolors='white', linewidth=2)
+        ax.annotate(name, xy=(participants, satisfaction), xytext=(5, 5),
+                   textcoords='offset points', fontsize=9, color=COLORS['primary'])
+
+    ax.set_xlabel('参加者数（名）', fontsize=11, fontweight='bold')
+    ax.set_ylabel('平均満足度', fontsize=11, fontweight='bold')
+    ax.set_title('期別 参加者数 × 満足度 × 協賛額', fontsize=14, fontweight='bold', pad=15)
+    ax.set_xlim(15, 50)
+    ax.set_ylim(2.5, 5.0)
+    ax.grid(True, alpha=0.3)
+
+    # 凡例（バブルサイズ）
+    for size, label in [(50, '0万円'), (200, '5万円'), (350, '10万円')]:
+        ax.scatter([], [], s=size, c=COLORS['gray'], alpha=0.5, label=label, edgecolors='white')
+    ax.legend(title='協賛額', loc='lower right', fontsize=9)
+
+    save_figure(fig, 'bubble_evaluation.png')
+
+# ===========================================
+# 24. エリアチャート（申込の累積推移）
+# ===========================================
+def chart_application_area():
+    """申込の累積推移（エリアチャート、世代別）"""
+    weeks = ['9/21', '10/5', '10/19', '11/2', '11/16', '11/30', '12/7', '12/14', '12/21', '12/28']
+
+    # 世代別の累積データ（概算）
+    gen1_10 = [8, 16, 25, 38, 52, 80, 115, 170, 205, 209]
+    gen11_20 = [5, 12, 20, 30, 45, 75, 105, 155, 183, 187]
+    gen21_30 = [3, 5, 8, 10, 14, 22, 35, 70, 100, 104]
+    gen31_37 = [1, 2, 2, 2, 3, 6, 9, 20, 30, 33]
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+
+    ax.fill_between(weeks, gen1_10, alpha=0.8, label='1〜10期', color=COLORS['primary'])
+    ax.fill_between(weeks, gen11_20, alpha=0.6, label='11〜20期', color=COLORS['secondary'])
+    ax.fill_between(weeks, gen21_30, alpha=0.5, label='21〜30期', color='#63B3ED')
+    ax.fill_between(weeks, gen31_37, alpha=0.4, label='31〜37期', color='#90CDF4')
+
+    ax.set_xlabel('日付', fontsize=11, fontweight='bold')
+    ax.set_ylabel('累積申込者数（名）', fontsize=11, fontweight='bold')
+    ax.set_title('世代別 申込推移', fontsize=14, fontweight='bold', pad=15)
+    ax.legend(loc='upper left', fontsize=9)
+    ax.set_ylim(0, 220)
+    plt.xticks(rotation=45)
+
+    save_figure(fig, 'application_area.png')
+
+# ===========================================
+# 25. ゲージチャート（目標達成率）
+# ===========================================
+def chart_target_gauge():
+    """目標達成率のゲージチャート"""
+    fig, axes = plt.subplots(1, 4, figsize=(12, 3))
+
+    targets = [
+        ('参加者数', 533, 630, '名'),
+        ('収入', 285, 350, '万円'),
+        ('料理満足度', 3.34, 4.0, '/5'),
+        ('若手参加', 33, 60, '名'),
+    ]
+
+    for ax, (label, current, target, unit) in zip(axes, targets):
+        rate = min(current / target * 100, 100)
+
+        # 背景の円弧
+        theta = np.linspace(0, np.pi, 100)
+        ax.plot(np.cos(theta), np.sin(theta), color=COLORS['light_gray'], linewidth=15)
+
+        # 達成率の円弧
+        theta_filled = np.linspace(0, np.pi * rate / 100, 100)
+        color = COLORS['success'] if rate >= 80 else COLORS['warning'] if rate >= 60 else COLORS['accent']
+        ax.plot(np.cos(theta_filled), np.sin(theta_filled), color=color, linewidth=15)
+
+        # 中央にテキスト
+        ax.text(0, 0.2, f'{rate:.0f}%', ha='center', va='center', fontsize=16, fontweight='bold', color=COLORS['primary'])
+        ax.text(0, -0.15, f'{current}{unit}', ha='center', va='center', fontsize=10, color=COLORS['gray'])
+        ax.text(0, -0.35, f'目標: {target}{unit}', ha='center', va='center', fontsize=9, color=COLORS['gray'])
+
+        ax.set_title(label, fontsize=11, fontweight='bold', pad=5)
+        ax.set_xlim(-1.2, 1.2)
+        ax.set_ylim(-0.6, 1.2)
+        ax.axis('off')
+
+    fig.suptitle('現状 vs 目標（達成率）', fontsize=14, fontweight='bold', y=1.1)
+    plt.tight_layout()
+
+    save_figure(fig, 'target_gauge.png')
+
+# ===========================================
 # メイン処理
 # ===========================================
 if __name__ == '__main__':
@@ -677,5 +1044,16 @@ if __name__ == '__main__':
     chart_motivation_by_department()
     chart_deadline_effect()
     chart_issues_count()
+
+    # 新しい種類のチャート
+    chart_generation_radar()
+    chart_early_final_scatter()
+    chart_revenue_structure()
+    chart_satisfaction_heatmap()
+    chart_revenue_waterfall()
+    chart_opening_conditions()
+    chart_bubble_evaluation()
+    chart_application_area()
+    chart_target_gauge()
 
     print('All charts generated successfully!')
