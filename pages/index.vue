@@ -197,7 +197,7 @@
             <div class="md:flex md:gap-8 mb-8">
               <div class="flex-shrink-0 mb-6 md:mb-0">
                 <img
-                  src="https://storage.googleapis.com/studio-cms-assets/projects/BVqXkelzOR/s-300x300_webp_c662db93-a50f-4164-baa1-865c34f72919.png"
+                  src="/gcs-assets/s-300x300_webp_c662db93-a50f-4164-baa1-865c34f72919.png"
                   alt="宮城 潤"
                   class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover mx-auto md:mx-0"
                 />
