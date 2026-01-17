@@ -24,6 +24,6 @@ logs
 !.env.example
 
 # Data files (個人情報を含むため)
-*.tsv
-*.csv
-大同窓会協賛リスト*.tsv
+data/*.tsv
+data/*.csv
+data/*.json
