@@ -129,9 +129,9 @@ def create_heatmap(cross_data, cross_counts, gen_totals):
     cbar = plt.colorbar(im, ax=ax, shrink=0.8)
     cbar.set_label('言及率（%）', fontsize=11, fontweight='bold')
 
-    # タイトル
-    ax.set_title('世代別 不参加理由の傾向（ヒートマップ）', fontsize=16, fontweight='bold', pad=20)
-    ax.set_xlabel('世代グループ', fontsize=12, fontweight='bold')
+    # タイトル（分母を明示）
+    ax.set_title('世代別 不参加理由の傾向\n※割合は各世代の回答者数を分母とした言及率', fontsize=14, fontweight='bold', pad=20)
+    ax.set_xlabel('世代グループ（各世代の回答者数が分母）', fontsize=11, fontweight='bold')
 
     plt.tight_layout()
     plt.savefig('../images/analysis/non_participation_heatmap.png', dpi=150, bbox_inches='tight',
