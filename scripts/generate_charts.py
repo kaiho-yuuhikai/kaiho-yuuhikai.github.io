@@ -304,7 +304,7 @@ def chart_fee_tolerance():
     """会費許容額の世代別分布"""
     generations = ['1〜10期\n（ベテラン）', '11〜20期\n（中堅）', '21〜30期', '31〜37期\n（若手）']
     current_fee = [5500, 5500, 5500, 3000]
-    tolerance = [6176, 6167, 5800, 5000]
+    tolerance = [6250, 6100, 5722, 5000]
 
     fig, ax = plt.subplots(figsize=(9, 6))
 
