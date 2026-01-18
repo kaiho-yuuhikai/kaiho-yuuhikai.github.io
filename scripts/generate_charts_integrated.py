@@ -942,7 +942,7 @@ def chart_fee_tolerance(df):
 
     generations = ['1〜10期\n（ベテラン）', '11〜20期\n（中堅）', '21〜30期', '31〜37期\n（若手）']
     current_fee = [5500, 5500, 5500, 3000]
-    tolerance = [6176, 6167, 5800, 5000]  # デフォルト値
+    tolerance = [6250, 6100, 5722, 5000]  # 正確なデータ
 
     fig, ax = plt.subplots(figsize=(9, 6))
 
