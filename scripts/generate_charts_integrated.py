@@ -571,7 +571,7 @@ def chart_information_source(df):
 
     print(f"  情報入手経路の列: {info_col[0][:50]}...")
     info_data = df[info_col[0]].dropna()
-    total = len(info_data)
+    total = len(df)  # 分母は全回答者数（119名）
 
     # 各選択肢のカウント（複数回答対応）
     sources = {
@@ -622,14 +622,16 @@ def chart_information_source(df):
         percentages,
         labels=labels,
         colors=colors,
-        autopct='%1.1f%%',
+        autopct='',
         startangle=90,
         pctdistance=0.75,
         labeldistance=1.15,
         textprops={'fontsize': 10}
     )
 
-    for autotext in autotexts:
+    # 到達率（119名に対する割合）をそのまま表示
+    for i, autotext in enumerate(autotexts):
+        autotext.set_text(f'{percentages[i]:.1f}%')
         autotext.set_color('white')
         autotext.set_fontweight('bold')
 
@@ -654,16 +656,16 @@ def chart_desired_programs(df):
         return
 
     program_data = df[program_col[0]].dropna()
-    total = len(program_data)
+    total = len(df)  # 分母は全回答者数（119名）
 
-    # 各選択肢のカウント
+    # 各選択肢のカウント（厳密なキーワードで誤カウントを防止）
     programs_keywords = {
-        '校歌斉唱\n（芸術科合唱つき）': ['校歌', '斉唱'],
-        '思い出ビデオ\n・スライドショー': ['ビデオ', 'スライド', '思い出'],
-        '学科・専門分野別\n交流コーナー': ['学科', '専門分野', '交流コーナー'],
-        '在校生の\n活動紹介': ['在校生', '活動紹介'],
-        '卒業生有志の\n音楽・パフォーマンス': ['音楽', 'パフォーマンス', '有志'],
-        'スマホ参加型\n企画（クイズ等）': ['スマホ', 'クイズ', '参加型'],
+        '校歌斉唱\n（芸術科合唱つき）': ['校歌斉唱'],
+        '思い出ビデオ\n・スライドショー': ['スライドショー・思い出ビデオ', '当時のスライドショー'],
+        '学科・専門分野別\n交流コーナー': ['学科・専門分野ごとの交流'],
+        '在校生の\n活動紹介': ['在校生の活動紹介'],
+        '卒業生有志の\n音楽・パフォーマンス': ['卒業生有志による音楽'],
+        'スマホ参加型\n企画（クイズ等）': ['スマホを活用した参加型'],
     }
 
     programs_count = {}
@@ -714,7 +716,7 @@ def chart_non_participation_reasons(df):
         return
 
     reason_data = df[reason_col[0]].dropna()
-    total = len(reason_data)
+    total = len(df)  # 分母は全回答者数（119名）
 
     reasons_keywords = {
         '仕事の都合': ['仕事', '業務', '勤務'],
@@ -781,17 +783,20 @@ def chart_opening_conditions(df):
     time_col = [c for c in df.columns if '時期' in c]
     day_col = [c for c in df.columns if '曜日' in c]
 
+    # 分母は全回答者数（119名）
+    total = len(df)
+
     # 開催頻度
     if freq_col:
         freq_data = df[freq_col[0]].dropna()
-        total = len(freq_data)
         freq_counts = {
             '5年に1回': sum('5年' in str(x) for x in freq_data),
             '3年に1回': sum('3年' in str(x) for x in freq_data),
             '毎年': sum('毎年' in str(x) or '1年' in str(x) for x in freq_data),
             'その他': 0,
         }
-        freq_counts['その他'] = total - sum(freq_counts.values())
+        matched = sum(freq_counts.values())
+        freq_counts['その他'] = len(freq_data) - matched
         freq_labels = list(freq_counts.keys())
         freq_sizes = [v / total * 100 for v in freq_counts.values()]
     else:
@@ -807,9 +812,22 @@ def chart_opening_conditions(df):
         autotext.set_fontweight('bold')
     axes[0].set_title('開催頻度', fontsize=12, fontweight='bold')
 
-    # 開催時期
-    time_labels = ['年末年始', '夏休み', 'GW', 'その他']
-    time_sizes = [81.4, 10.2, 5.1, 3.3]
+    # 開催時期（実データから計算）
+    if time_col:
+        time_data = df[time_col[0]].dropna()
+        time_counts = {
+            '年末年始': sum('年末' in str(x) or '年始' in str(x) for x in time_data),
+            '夏休み': sum('夏' in str(x) for x in time_data),
+            'GW': sum('GW' in str(x) or 'ゴールデン' in str(x) for x in time_data),
+            'その他': 0,
+        }
+        matched = sum(time_counts.values())
+        time_counts['その他'] = len(time_data) - matched
+        time_labels = list(time_counts.keys())
+        time_sizes = [v / total * 100 for v in time_counts.values()]
+    else:
+        time_labels = ['年末年始', '夏休み', 'GW', 'その他']
+        time_sizes = [84.0, 10.1, 5.0, 0.8]
     wedges1, texts1, autotexts1 = axes[1].pie(
         time_sizes, labels=time_labels, autopct='%1.0f%%', startangle=90,
         colors=chart_colors, wedgeprops=dict(width=0.5, edgecolor='white'),
@@ -819,9 +837,20 @@ def chart_opening_conditions(df):
         autotext.set_fontweight('bold')
     axes[1].set_title('開催時期', fontsize=12, fontweight='bold')
 
-    # 曜日
-    day_labels = ['土曜日', '日曜日', '平日', '不問']
-    day_sizes = [33.9, 28.8, 5.1, 32.2]
+    # 曜日（実データから計算）
+    if day_col:
+        day_data = df[day_col[0]].dropna()
+        day_counts = {
+            '土曜日': sum('土曜' in str(x) for x in day_data),
+            '日曜日': sum('日曜' in str(x) for x in day_data),
+            '平日': sum('平日' in str(x) for x in day_data),
+            '不問': sum('どちらでも' in str(x) or '不問' in str(x) or 'どの曜日' in str(x) for x in day_data),
+        }
+        day_labels = list(day_counts.keys())
+        day_sizes = [v / total * 100 for v in day_counts.values()]
+    else:
+        day_labels = ['土曜日', '日曜日', '平日', '不問']
+        day_sizes = [31.9, 28.6, 5.0, 34.5]
     wedges2, texts2, autotexts2 = axes[2].pie(
         day_sizes, labels=day_labels, autopct='%1.0f%%', startangle=90,
         colors=chart_colors, wedgeprops=dict(width=0.5, edgecolor='white'),
@@ -870,29 +899,22 @@ def chart_cooperation_willingness(df):
                     break
         counts[item] = count
 
-    # 取り組み意欲の高い層（gemini_sentiment >= 4 または engagement_score >= 5）
-    if 'gemini_sentiment' in df.columns:
-        high_motivation = df[(df['gemini_sentiment'] >= 4) | (df.get('engagement_score', 0) >= 5)]
-        total_motivated = len(high_motivation)
-    else:
-        total_motivated = len(coop_data[coop_data.str.len() > 10])  # 何か選択している人
-
-    if total_motivated == 0:
-        total_motivated = 1
+    # 分母は全回答者数（レポート本文と一致させる）
+    total_respondents = len(df)
 
     # ソートして上位表示
     sorted_items = sorted(counts.items(), key=lambda x: x[1], reverse=True)
     items = [x[0] for x in sorted_items]
     count_values = [x[1] for x in sorted_items]
-    percentages = [c / total_motivated * 100 for c in count_values]
+    percentages = [c / total_respondents * 100 for c in count_values]
 
     print(f"  協力意向集計: {counts}")
-    print(f"  意欲の高い層: {total_motivated}名")
+    print(f"  全回答者数: {total_respondents}名")
 
     fig, ax = plt.subplots(figsize=(9, 5))
 
     y_pos = np.arange(len(items))
-    colors = [COLORS['primary'] if p >= 50 else COLORS['secondary'] if p >= 30 else '#63B3ED' for p in percentages]
+    colors = [COLORS['primary'] if p >= 35 else COLORS['secondary'] if p >= 20 else '#63B3ED' for p in percentages]
     bars = ax.barh(y_pos, percentages, color=colors, height=0.6, edgecolor='white')
 
     for bar, pct, cnt in zip(bars, percentages, count_values):
@@ -902,9 +924,9 @@ def chart_cooperation_willingness(df):
 
     ax.set_yticks(y_pos)
     ax.set_yticklabels(items, fontsize=10)
-    ax.set_xlim(0, 80)
-    ax.set_xlabel(f'割合（%）/ 意欲の高い{total_motivated}名中', fontsize=12, fontweight='bold')
-    ax.set_title('協力内容の傾向（取組意欲の高い層）', fontsize=16, fontweight='bold', pad=20)
+    ax.set_xlim(0, 60)
+    ax.set_xlabel(f'割合（%）/ 全回答者{total_respondents}名中', fontsize=12, fontweight='bold')
+    ax.set_title('協力内容の傾向（複数選択可）', fontsize=16, fontweight='bold', pad=20)
 
     ax.invert_yaxis()
 
