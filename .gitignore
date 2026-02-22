@@ -18,12 +18,16 @@ logs
 .fleet
 .idea
 
+# Python
+.venv
+__pycache__
+
 # Local env files
 .env
 .env.*
 !.env.example
 
 # Data files (個人情報を含むため)
-data/*.tsv
-data/*.csv
-data/*.json
+analysis/data/*.tsv
+analysis/data/*.csv
+analysis/data/*.json
