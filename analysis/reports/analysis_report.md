@@ -60,13 +60,13 @@
 | **全体満足度** | **3.97/5.0**（実測70%、補完込み約80%が「満足」以上）|
 | 料理満足度 | **3.31/5.0**（最重要課題） |
 
-<img src="../images/analysis/target_gauge.png" alt="現状 vs 目標" style="max-width: 100%; width: 800px;">
+<img src="../charts/target_gauge.png" alt="現状 vs 目標" style="max-width: 100%; width: 800px;">
 
-<img src="../images/analysis/target_roadmap.png" alt="次回目標630名への道筋" style="max-width: 100%; width: 800px;">
+<img src="../charts/target_roadmap.png" alt="次回目標630名への道筋" style="max-width: 100%; width: 800px;">
 
 ### アンケート回答者の構成
 
-<img src="../images/analysis/respondents_by_generation.png" alt="アンケート回答者の世代分布" style="max-width: 100%; width: 600px;">
+<img src="../charts/respondents_by_generation.png" alt="アンケート回答者の世代分布" style="max-width: 100%; width: 600px;">
 
 ---
 
@@ -85,11 +85,11 @@
 
 ### 1.1 期別参加者数
 
-<img src="../images/analysis/participants_by_class.png" alt="期別参加者数" style="max-width: 100%; width: 800px;">
+<img src="../charts/participants_by_class.png" alt="期別参加者数" style="max-width: 100%; width: 800px;">
 
 ### 1.2 世代グループ別参加状況
 
-<img src="../images/analysis/generation_distribution.png" alt="世代グループ別参加状況" style="max-width: 100%; width: 750px;">
+<img src="../charts/generation_distribution.png" alt="世代グループ別参加状況" style="max-width: 100%; width: 750px;">
 
 | グループ | 参加者数 | 構成比 | 平均/期 |
 |---------|---------|-------|--------|
@@ -124,7 +124,7 @@
 
 ### 1.4 登壇者・運営メンバーの有無と参加者数の関係
 
-<img src="../images/analysis/involvement_effect.png" alt="運営関与タイプ別 平均参加者数" style="max-width: 100%; width: 800px;">
+<img src="../charts/involvement_effect.png" alt="運営関与タイプ別 平均参加者数" style="max-width: 100%; width: 800px;">
 
 今回、本編登壇者・事前イベントメンター・運営メンバーを期や学科を分散させて配置した。
 その関与の有無と参加者数の関係を分析した。
@@ -260,9 +260,9 @@
 
 10月末時点の申込者から**事前イベントのメンター**と**本編登壇者**を選出した（運営メンバーはそれ以前に決定済み）。早期申込者の有無がその後の参加者増加に影響したかを分析した。
 
-<img src="../images/analysis/application_timeline.png" alt="申込推移（時系列）" style="max-width: 100%; width: 750px;">
+<img src="../charts/application_timeline.png" alt="申込推移（時系列）" style="max-width: 100%; width: 750px;">
 
-<img src="../images/analysis/application_area.png" alt="世代別申込推移" style="max-width: 100%; width: 750px;">
+<img src="../charts/application_area.png" alt="世代別申込推移" style="max-width: 100%; width: 750px;">
 
 **全体の週別推移**
 
@@ -287,7 +287,7 @@
 
 **早期申込数と最終参加者数の相関**
 
-<img src="../images/analysis/early_final_scatter.png" alt="早期申込 vs 最終参加者" style="max-width: 100%; width: 800px;">
+<img src="../charts/early_final_scatter.png" alt="早期申込 vs 最終参加者" style="max-width: 100%; width: 800px;">
 
 - 相関係数: **0.621**（強い正の相関）
 - 早期に申し込む「意欲的なメンバー」がいる期は、最終的な参加者も多い
@@ -357,7 +357,7 @@
 
 運営施策として「11月末までに申込を」と周知し、当初締切12/15を12/22に延長した。この効果と最適な締切日を分析。
 
-<img src="../images/analysis/deadline_effect.png" alt="締切前後の申込状況" style="max-width: 100%; width: 800px;">
+<img src="../charts/deadline_effect.png" alt="締切前後の申込状況" style="max-width: 100%; width: 800px;">
 
 **週別申込推移と締切効果**
 
@@ -466,7 +466,7 @@
 
 法人・個人協賛の期別データを分析し、参加者数・満足度との関係を調査した。
 
-<img src="../images/analysis/sponsorship_effect.png" alt="協賛効果の比較" style="max-width: 100%; width: 800px;">
+<img src="../charts/sponsorship_effect.png" alt="協賛効果の比較" style="max-width: 100%; width: 800px;">
 
 **協賛のある期（16期）**
 
@@ -507,9 +507,9 @@
 
 **協賛+メンター+運営のトリプル効果**
 
-<img src="../images/analysis/bubble_evaluation.png" alt="期別総合評価（バブルチャート）- 回答者ベース" style="max-width: 100%; width: 800px;">
+<img src="../charts/bubble_evaluation.png" alt="期別総合評価（バブルチャート）- 回答者ベース" style="max-width: 100%; width: 800px;">
 
-<img src="../images/analysis/bubble_participants.png" alt="期別総合評価（バブルチャート）- 参加者ベース（533名）" style="max-width: 100%; width: 800px;">
+<img src="../charts/bubble_participants.png" alt="期別総合評価（バブルチャート）- 参加者ベース（533名）" style="max-width: 100%; width: 800px;">
 
 | 期 | 参加者 | 協賛額 | メンター | 運営 |
 |---|-------|--------|--------|------|
@@ -561,7 +561,7 @@
 
 ### 2.2 さらに細分化した分析
 
-<img src="../images/analysis/fee_tolerance.png" alt="会費許容額 vs 現行会費" style="max-width: 100%; width: 800px;">
+<img src="../charts/fee_tolerance.png" alt="会費許容額 vs 現行会費" style="max-width: 100%; width: 800px;">
 
 | グループ | 参加者 | 回答数 | 会費満足度 | 許容額 | 内容重視派 | 現行との差 |
 |---------|-------|-------|----------|-------|----------|----------|
@@ -598,7 +598,7 @@
 
 ### 2.4 傾斜シミュレーション
 
-<img src="../images/analysis/fee_simulation.png" alt="傾斜シミュレーション" style="max-width: 100%; width: 750px;">
+<img src="../charts/fee_simulation.png" alt="傾斜シミュレーション" style="max-width: 100%; width: 750px;">
 
 | 案 | 会費設計 | 収入 | 現行比 |
 |---|---------|-----|-------|
@@ -624,11 +624,11 @@
 
 ### 3.1 評価項目別スコア
 
-<img src="../images/analysis/satisfaction_scores.png" alt="満足度評価" style="max-width: 100%; width: 800px;">
+<img src="../charts/satisfaction_scores.png" alt="満足度評価" style="max-width: 100%; width: 800px;">
 
-<img src="../images/analysis/generation_issues.png" alt="世代別課題比較" style="max-width: 100%; width: 800px;">
+<img src="../charts/generation_issues.png" alt="世代別課題比較" style="max-width: 100%; width: 800px;">
 
-<img src="../images/analysis/satisfaction_heatmap.png" alt="世代別満足度ヒートマップ" style="max-width: 100%; width: 750px;">
+<img src="../charts/satisfaction_heatmap.png" alt="世代別満足度ヒートマップ" style="max-width: 100%; width: 750px;">
 
 | 項目 | 平均 | 評価 |
 |-----|-----|-----|
@@ -642,9 +642,9 @@
 - 他の満足度項目（料理r=0.60、会費r=0.61、日程r=0.51、時間帯r=0.52）
 - 自由記述コメントのセンチメント分析（r=0.41）
 
-<img src="../images/analysis/satisfaction_distribution.png" alt="満足度分布ヒストグラム" style="max-width: 100%; width: 800px;">
+<img src="../charts/satisfaction_distribution.png" alt="満足度分布ヒストグラム" style="max-width: 100%; width: 800px;">
 
-<img src="../images/analysis/correlation_analysis.png" alt="全体満足度と各項目の相関" style="max-width: 100%; width: 800px;">
+<img src="../charts/correlation_analysis.png" alt="全体満足度と各項目の相関" style="max-width: 100%; width: 800px;">
 
 #### 全体満足度の詳細分析
 
@@ -672,7 +672,7 @@
 
 ### 3.2 自由回答から抽出した課題（定量分析）
 
-<img src="../images/analysis/issues_count.png" alt="課題別言及数" style="max-width: 100%; width: 750px;">
+<img src="../charts/issues_count.png" alt="課題別言及数" style="max-width: 100%; width: 750px;">
 
 **コメント回答数**: プログラム関連80件、飲食・会場関連85件（重複あり）
 
@@ -769,7 +769,7 @@
 
 ## 4. 期別の参加者増加施策
 
-<img src="../images/analysis/participation_potential.png" alt="参加者増加ポテンシャル" style="max-width: 100%; width: 800px;">
+<img src="../charts/participation_potential.png" alt="参加者増加ポテンシャル" style="max-width: 100%; width: 800px;">
 
 ### 4.1 参加者が少ない期への対策
 
@@ -805,7 +805,7 @@
 
 ### 5.1 情報入手経路
 
-<img src="../images/analysis/information_source.png" alt="情報入手経路" style="max-width: 100%; width: 750px;">
+<img src="../charts/information_source.png" alt="情報入手経路" style="max-width: 100%; width: 750px;">
 
 | チャネル | 到達率 | 評価 |
 |---------|-------|-----|
@@ -816,7 +816,7 @@
 
 ### 5.2 不参加理由と対応
 
-<img src="../images/analysis/non_participation_reasons.png" alt="不参加理由" style="max-width: 100%; width: 800px;">
+<img src="../charts/non_participation_reasons.png" alt="不参加理由" style="max-width: 100%; width: 800px;">
 
 | 不参加理由 | 割合 | 対応策 |
 |-----------|-----|-------|
@@ -833,7 +833,7 @@
 
 ### 6.1 希望プログラムTOP8
 
-<img src="../images/analysis/desired_programs.png" alt="希望プログラム" style="max-width: 100%; width: 800px;">
+<img src="../charts/desired_programs.png" alt="希望プログラム" style="max-width: 100%; width: 800px;">
 
 | プログラム | 希望率 |
 |----------|-------|
@@ -848,7 +848,7 @@
 
 ### 6.2 開催条件の希望
 
-<img src="../images/analysis/opening_conditions.png" alt="開催希望条件" style="max-width: 100%; width: 800px;">
+<img src="../charts/opening_conditions.png" alt="開催希望条件" style="max-width: 100%; width: 800px;">
 
 | 項目 | 最多回答 | 割合 |
 |-----|---------|-----|
@@ -860,7 +860,7 @@
 
 ## 7. 施策優先度まとめ
 
-<img src="../images/analysis/strategy_priority.png" alt="施策優先度マトリクス" style="max-width: 100%; width: 800px;">
+<img src="../charts/strategy_priority.png" alt="施策優先度マトリクス" style="max-width: 100%; width: 800px;">
 
 ### 7.1 すぐやるべき（高効果・低コスト）
 
@@ -1025,9 +1025,9 @@
 
 **提案3: 両方を併用した場合**
 
-<img src="../images/analysis/revenue_structure.png" alt="収益構造の比較" style="max-width: 100%; width: 750px;">
+<img src="../charts/revenue_structure.png" alt="収益構造の比較" style="max-width: 100%; width: 750px;">
 
-<img src="../images/analysis/revenue_waterfall.png" alt="増収施策の積み上げ効果" style="max-width: 100%; width: 750px;">
+<img src="../charts/revenue_waterfall.png" alt="増収施策の積み上げ効果" style="max-width: 100%; width: 750px;">
 
 | 施策 | 追加運営費 | 1人あたり |
 |-----|----------|----------|
@@ -1080,7 +1080,7 @@
 
 #### 学科別の傾向
 
-<img src="../images/analysis/motivation_by_department.png" alt="学科別 取組意欲の割合" style="max-width: 100%; width: 750px;">
+<img src="../charts/motivation_by_department.png" alt="学科別 取組意欲の割合" style="max-width: 100%; width: 750px;">
 
 | 学科 | 意欲高い人 | 全回答者 | 割合 |
 |------|-----------|---------|------|
@@ -1093,7 +1093,7 @@
 
 #### 期生（世代）の傾向
 
-<img src="../images/analysis/motivation_by_generation.png" alt="世代別 取組意欲の高い層" style="max-width: 100%; width: 750px;">
+<img src="../charts/motivation_by_generation.png" alt="世代別 取組意欲の高い層" style="max-width: 100%; width: 750px;">
 
 | 世代グループ | 意欲高い人数 | 構成比 | 回答者に占める割合 |
 |-------------|------------|-------|----------------|
@@ -1106,7 +1106,7 @@
 
 #### 協力内容の傾向（全回答者119名の選択）
 
-<img src="../images/analysis/cooperation_willingness.png" alt="協力内容の傾向" style="max-width: 100%; width: 800px;">
+<img src="../charts/cooperation_willingness.png" alt="協力内容の傾向" style="max-width: 100%; width: 800px;">
 
 | 協力内容 | 選択数 | 割合 |
 |---------|-------|------|

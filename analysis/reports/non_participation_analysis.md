@@ -1,6 +1,6 @@
 # 不参加理由の世代別分析
 
-<img src="../images/analysis/non_participation_heatmap.png" alt="世代別不参加理由ヒートマップ" style="max-width: 100%; width: 800px;">
+<img src="../charts/non_participation_heatmap.png" alt="世代別不参加理由ヒートマップ" style="max-width: 100%; width: 800px;">
 
 ### 世代別 不参加理由の分析
 
